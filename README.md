@@ -50,13 +50,10 @@ LosPeluchesDelLado-master/
 
 ## Cómo correrlo localmente
 
-Por las rutas relativas entre páginas (`../../`) y los `fetch`/recursos, es mejor no abrir los archivos con doble clic sino levantar un servidor simple:
-
-```bash
-# desde la carpeta del proyecto
-python3 -m http.server 8000
-# luego abre http://localhost:8000
-```
+Generamos un código URL a través de GitHub en Pages
+'''
+https://danielgonzalezw16.github.io/LosPeluchesDelLado/
+'''
 
 ## Stack
 
