@@ -1,0 +1,48 @@
+/* SECCIÓN DE BUSQUEDA GENERAL */
+/* --------------------------- */
+#barraBusqueda {
+  width: 200px; /* Ancho */
+  background-color: #ffe2c7;
+  color: #333333;
+  transition: width 0.4s ease-in-out; /* Suavidad y Tiempo Animación */
+}
+
+/* Funcion para Expandir */
+#barraBusqueda:focus {
+  width: 400px; /* Tamaño Extensión */
+  outline: none; /* Quita el Borde Azul que hay por defecto*/
+}
+
+/* Contenedor en Relativo para que Flote la Lista */
+.search-box {
+    position: relative;
+}
+
+/* Lista de sugerencias Style */
+.sugerencias_busqueda {
+    position: absolute;
+    top: 100%;
+    left: 20px;
+    right: 20px;
+    background: #ffe2c7;
+    border-radius: 0 0 15px 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    list-style: none;
+    padding: 0;
+    margin: 5px 0 0 0;
+    z-index: 1000;
+    display: none; /* Ocultas por defecto */
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.sugerencias_busqueda li {
+    padding: 8px 15px;
+    cursor: pointer;
+    color: #4e3629;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.sugerencias_busqueda li:hover {
+    background-color: #e7c2ae;
+}

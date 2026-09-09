@@ -1,0 +1,300 @@
+body{
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-image: url('PeluAssets/Fondos/Peluches_Final_Actual.png');
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  background-color: #fdf8f5;
+}
+
+.content {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* SECCIÓN MENÚ Y BUSQUEDA */
+/* ----------------------- */
+
+.menu{
+  display: grid;
+  width: 10%;
+  gap: 10px;
+  margin-bottom: 100px;
+}
+
+.logo_co{
+  padding-top: 90px;
+}
+
+.logo{
+  height: 170px;
+  width: 170px;
+  object-fit: cover;
+  cursor: pointer;
+  filter: drop-shadow(0px 8px 16px rgba(0, 0, 0, 0.18));
+  z-index: 2;
+}
+
+/* SubSección: Barra de Busqueda*/
+/* -----------------------------*/
+.borde_inicial{
+  margin-top:10px;
+  height: 60px;
+  width: 100%;
+}
+
+#barraBusquedaIndex {
+  width: 200px; /* Ancho */
+  background-color: #ffe2c7;
+  color: #333333;
+  transition: width 0.4s ease-in-out; /* Suavidad y Tiempo Animación */
+}
+
+/* Funcion para Expandir */
+#barraBusquedaIndex:focus {
+  width: 400px; /* Tamaño Extensión */
+  outline: none; /* Quita el Borde Azul Default*/
+}
+
+.separador {
+  width: 1.5px; /* Grosor */
+  height: 20px; /* Altura */
+  background-color: #4e3629; 
+  opacity: 0.5; /* Transparencia */
+}
+
+.search-box {
+    position: relative;
+}
+
+.sugerencias_busquedaIndex {
+    position: absolute;
+    top: 100%;
+    left: 20px;
+    right: 20px;
+    background: #ffe2c7;
+    border-radius: 0 0 15px 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    list-style: none;
+    padding: 0;
+    margin: 5px 0 0 0;
+    z-index: 1000;
+    display: none; /* Ocultas por defecto */
+    max-height: 150px;
+    overflow-y: auto;
+}
+.sugerencias_busquedaIndex li {
+    padding: 8px 15px;
+    cursor: pointer;
+    color: #4e3629;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.sugerencias_busquedaIndex li:hover {
+    background-color: #e7c2ae;
+}
+
+/* --------------------------- */
+/* - Fin SubSección Busqueda - */
+/* --------------------------- */
+
+/* SubSección: Botones */
+/* ------------------- */
+
+/* Color Texto y Transición */
+.nav-justified .nav-link {
+  color: #5c4a3c !important; /* Café Oscuro para el Fondo Café */
+  transition: all 0.3s ease;   /* Para hacer Cambio de Color Suave y Fluido */
+}
+
+/* Efecto al poner Mouse en Opcion Inactiva */
+.nav-justified .nav-link:not(.active):hover {
+  background-color: rgba(255, 255, 255, 0.5) !important; /* Color Traslúcido */
+  color: #3d2f24 !important; /* Para que el Texto se Oscurezca y haga Contraste */
+  border-radius: 20px; /* Bordes Redondos para Suavidad */
+}
+
+/* Opción en Uso */
+.nav-justified .nav-link.active {
+  background-color: #ffffff !important; /* Blanco para la Pildora Actual */
+  color: #3d2f24 !important; /* Color Texto en la Pildora */
+}
+
+/*------------------------------*/
+/*       Fin Sección Menu       */
+/*------------------------------*/
+
+@media (max_width: 768px){
+  .contenedor{
+    width:95%;
+  }
+}
+
+.button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #000000;
+  border-radius: 5px ;
+  cursor: pointer;
+}
+
+/* AREA PRINCIPAL DE IMAGENES MOVIBLES */
+/* ----------------------------------- */
+.principal-plushes{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px; /* Separa los Botones de las Imágenes */
+  margin: 40px auto;
+  margin-bottom: 250px;
+  width: 100%;
+  max-width: 1400px; /*Hasta donde llegan las Flechas del Margen*/
+}
+
+.dinamismo{
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 700px; /* Ancho de la Zona del Carrusel */
+  height: 250px;
+  margin: 0 auto;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+/* Este es el principal de las imagenes de la parte principal*/
+.pelu-item {
+  margin-top: 150px;
+  position: absolute; /*quietesita*/
+  width: 900px;
+  height: 500px;
+  border-radius: 40px;
+  object-fit: cover;
+  cursor: pointer; 
+  transition: transform 0.5s ease, opacity 0.5s ease, z-index 0.5s ease;
+}
+
+.pelu-item.item-center.efecto{
+  transform: translate3d(0, 0, 0) scale(1.05);
+}
+
+/* Centro*/
+.item-center {
+  transform: translate3d(0, 0, 0) scale(1);
+  opacity: 1;
+  z-index: 3;
+}
+.item-left {
+  transform: translate3d(-550px, 0, -100px) rotateY(25deg) scale(0.8);
+  opacity: 0.5;
+  z-index: 1;
+}
+.item-right {
+  transform: translate3d(550px, 0, -100px) rotateY(-25deg) scale(0.8);
+  opacity: 0.5;
+  z-index: 1;
+}
+
+/* Este son Ambas Flechas no solo Una*/
+button.pelu-arrow{
+  margin-top: 140px; 
+  align-self: flex-end;
+  background: none;
+  background-color:#ffffff00;
+  border:none;
+  font-size: 100px;
+  color: #ffffffc2;
+  cursor: pointer;
+  perspective: 1000px;
+  transition: transform 0.5s;
+  z-index: 4;
+}
+
+/* Ya saben, pero el efecto de agrandado */
+.pelu-arrow:hover{
+  transform: scale(1.2);
+}
+
+/*--------------------------*/
+/*     FIN AREA MOVIBLE     */
+/*--------------------------*/
+
+.movil {
+  width: 400px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.contenedor img {
+    width: 300px;       /* ancho fijo*/
+    height: 400px;       /* alto fijo*/
+    object-fit: cover;   /* recorta la imagen para llenar el espacio sin deformarla */
+    display: block;
+}
+
+.caja-sonic {  
+    width: 600px;
+    height: 300px;
+    display: block !important;
+    margin: 20px auto !important; 
+    background: transparent !important;
+}
+
+.video-producto{
+    width: 560px; 
+    height: 315px;
+    display: block !important;
+    margin: 20px auto !important; 
+    background: transparent !important;
+}
+.contenedor {
+    display: flex; /* Pone los elementos lado a lado */
+    align-items: center; /* Alinea el texto al centro verticalmente */
+    gap: 15px; /* Crea espacio entre la imagen y el texto */
+    margin-bottom: 20px; /* para que entre cada imagen tenga un espacio*/
+}
+
+/* SECCION FUENTES DE GOOGLE FONTS */
+/* ------------------------------- */
+.press-start-2p-regular {
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.patrick-hand-sc-regular {
+  font-family: "Patrick Hand SC", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.sniglet-regular {
+  font-family: "Sniglet", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.sniglet-extrabold {
+  font-family: "Sniglet", system-ui;
+  font-weight: 800;
+  font-style: normal;
+}
+
+
+/*--------------------------*/
+/*     FIN AREA FUENTES     */
+/*--------------------------*/
+
+footer{
+  background-color: #D7C4B7;
+  color: #000000;
+  text-align: center;
+  padding: 15px;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+}
