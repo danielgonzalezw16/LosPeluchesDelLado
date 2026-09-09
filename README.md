@@ -1,6 +1,6 @@
 # Los Peluches del Lado
 
-Sitio web estático para "Lo Quieres, Te lo Vendo", un emprendimiento de compra y venta de peluches ubicado en Santiago de Chile. Proyecto hecho con HTML, CSS y JavaScript puro (vanilla), usando Bootstrap 5.3.8 vía CDN.
+Sitio web estático para Pastel Plushes, un emprendimiento de compra y venta de peluches ubicado en Santiago de Chile. Proyecto hecho con HTML, CSS y JavaScript puro (vanilla), usando Bootstrap 5.3.8 vía CDN.
 
  > Este es un proyecto **frontend puro / mockup de curso**. No hay backend, base de datos ni persistencia real de datos (ver sección de Limitaciones Conocidas).
 
