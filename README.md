@@ -42,8 +42,8 @@ LosPeluchesDelLado-master/
 
 ## Funcionalidades
 
-- **Carrusel de portada**: rota entre categorías (Pokémon, Snoopy, Anime) con flechas y clic en las imágenes laterales.
-- **Buscador con autocompletado**: sugiere categorías (`snoopy`, `sonic`, `anime`, `pokemon`) mientras se escribe y redirige a la página de categoría correspondiente.
+- **Carrusel de portada**: rota entre categorías (Pokémon, Snoopy, Anime, Sonic) con flechas y clic en las imágenes laterales.
+- **Buscador con autocompletado**: sugiere categorías (`Snoopy`, `Sonic`, `Anime`, `Pokemon`) mientras se escribe y redirige a la página de categoría correspondiente.
 - **Catálogo por categoría**: páginas individuales por línea de producto, con precios en CLP.
 - **Navegación por menú**: acceso a Productos, Ventas, Historial y Usuario desde cualquier página.
 - **Formulario de usuario**: valida nombre, apellido, correo, ciudad y país con expresiones regulares antes de "enviar" (ver limitaciones).

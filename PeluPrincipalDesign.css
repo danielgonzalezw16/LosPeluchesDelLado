@@ -198,6 +198,12 @@ body{
   opacity: 0.5;
   z-index: 1;
 }
+.item-faraway {
+  transform: translate3d(0, 0, 0) scale(1);
+  opacity: 0.0;
+  pointer-events: none;
+  z-index: 10;
+}
 
 /* Este son Ambas Flechas no solo Una*/
 button.pelu-arrow{

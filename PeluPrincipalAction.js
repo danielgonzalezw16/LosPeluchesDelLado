@@ -6,10 +6,10 @@ const despuesPrincipal = document.getElementById('p-der');
 
 // Es la lista para las imagenes y guardar el orden
 const imgs = Array.from(document.querySelectorAll('.pelu-item'));
-const tiposImgs = ['item-left', 'item-center', 'item-right'];
+const tiposImgs = ['item-left', 'item-center', 'item-right','item-faraway'];
 
 // Lista para los Ids y cambiar su funcion
-const tiposIds = ['Pokemon','Snoopy','Anime']
+const tiposIds = ['Pokemon','Snoopy','Anime','Sonic']
 
 // Es la funcion para Actualizar cada vez que cambian de posicion
 function nuevoGanador() {
@@ -20,7 +20,7 @@ function nuevoGanador() {
     img.classList.add('cambio');
 
     // Quitamos todas las clases que haya
-    img.classList.remove('item-left', 'item-center', 'item-right');
+    img.classList.remove('item-left', 'item-center', 'item-right','item-faraway');
 
     // Ponemos la nueva clase que esta ahora, en el Array
     img.classList.add(tiposImgs[index]);
@@ -45,7 +45,8 @@ function nuevoClickeador() {
     const peluches = {
       Pokemon: 'PeluPages/Categorias/Categoria_Pokemon.html',
       Snoopy: 'PeluPages/Categorias/Categoria_Snoopys.html',
-      Anime: 'PeluPages/Categorias/Categoria_Anime.html'
+      Anime: 'PeluPages/Categorias/Categoria_Anime.html',
+      Sonic: 'PeluPages/Categorias/Categoria_Sonic.html'
     };
 
     // Ciclo para el URL de las imagenes
@@ -73,8 +74,7 @@ function nuevoClickeador() {
               const ultImg = tiposImgs.pop(); // pop es para ver la ultima
               tiposImgs.unshift(ultImg); // Agrega un elemento al principio
               nuevoGanador();
-            
-        }
+            } 
         });
 
         // Para si el mouse esta encima
