@@ -65,18 +65,16 @@ python3 -m http.server 8000
 
 Estas son observaciones de una revisión de código, documentadas para que quien continúe el proyecto sepa dónde está parado:
 
-1. **`index.html` tiene un bug funcional real**: carga tanto `PeluPrincipalAction.js` como `busquedaIndex.js`, pero `PeluPrincipalAction.js` referencia ids (`barraBusqueda`, `.sugeregncias_busqueda`) que no existen en `index.html` (ahí se llaman `barraBusquedaIndex`, `.sugeregncias_busquedaIndex`). Esto provoca un `TypeError` en tiempo de ejecución que detiene el resto del script — **el carrusel y el logo clickeable no funcionan en la portada**.
-2. **`PeluHistorial.html` no carga ningún `<script>`**: el buscador y las flechas de carrusel de esa página son puramente decorativos.
-3. **Duplicación de lógica de búsqueda**: existen dos implementaciones casi idénticas del autocompletado (una en `PeluPrincipalAction.js`, otra en `busquedaIndex.js`) solo porque los ids no están unificados entre páginas.
-4. **HTML inválido**: varias páginas tienen `<title>` seguido de un `<h1>` dentro de `<head>` (no permitido por la especificación). `Categoria_Snoopys.html` además deja un `<video>` sin cerrar, generando un `</div>` sin apertura correspondiente.
-5. **Elemento placeholder olvidado**: `PeluUsuario.html` contiene `<a href="url" target="new"></a>`, un enlace de ejemplo sin completar.
-6. **El formulario de usuario no persiste datos**: `validacion()` solo valida formato con regex; no hay `action`, `fetch` ni backend. Al pasar la validación, el formulario simplemente se envía a sí mismo (recarga de página) sin guardar nada.
-7. **Catálogo duplicado**: `PeluDuctos.html` muestra todas las categorías en una sola página, mientras cada `Categoria_*.html` repite el mismo contenido a mano. Agregar o modificar un producto requiere editar en más de un lugar.
-8. **Carpeta `PeluAssets/Pruebas-Uso Opcional/`** contiene ~11MB de pruebas de diseño descartadas que no se usan en el sitio — candidata a eliminarse o moverse fuera del repo.
+1. **`PeluHistorial.html` no carga ningún `<script>`**: el buscador y las flechas de carrusel de esa página son puramente decorativos.
+2. **Duplicación de lógica de búsqueda**: existen dos implementaciones casi idénticas del autocompletado (una en `BusquedaIndex.js`, otra en `BusquedaGeneral.js`) solo porque los ids no están unificados entre páginas.
+3. **HTML inválido**: `Categoria_Snoopys.html` y `Categoria_Sonic.html` deja un `<video>` sin cerrar, generando un `</div>` sin apertura correspondiente.
+4. **El formulario de usuario no persiste datos**: `validacion()` solo valida formato con regex; no hay `action`, `fetch` ni backend. Al pasar la validación, el formulario simplemente se envía a sí mismo (recarga de página) sin guardar nada.
+5. **Catálogo duplicado**: `PeluDuctos.html` muestra todas las categorías en una sola página, mientras cada `Categoria_*.html` repite el mismo contenido a mano. Agregar o modificar un producto requiere editar en más de un lugar.
+6. **Carpeta `PeluAssets/Pruebas-Uso Opcional/`** contiene ~11MB de pruebas de diseño descartadas que no se usan en el sitio — candidata a eliminarse o moverse fuera del repo a futuro.
 
 ## Próximos pasos sugeridos
 
-- Unificar los ids del buscador entre todas las páginas para poder borrar `busquedaIndex.js` y usar un solo script.
+- Unificar los ids del buscador entre todas las páginas para poder borrar `Busqueda*.js` y usar un solo script.
 - Generar el catálogo de productos desde una única fuente de datos (JSON o similar) en vez de HTML repetido.
 - Decidir si el formulario de usuario necesita backend real o si se queda como mockup (y dejarlo explícito en el código).
 - Validar el HTML con un linter (p. ej. el validador de W3C) para limpiar las etiquetas mal cerradas.
