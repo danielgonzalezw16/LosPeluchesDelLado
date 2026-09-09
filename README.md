@@ -13,9 +13,13 @@ Abre `index.html` directamente en el navegador. No requiere instalación ni serv
 ```
 LosPeluchesDelLado-master/
 ├── index.html                     # Página de inicio
-├── PeluPrincipalAction.js         # Lógica compartida: carrusel, buscador, logo, validación de formulario
-├── busquedaIndex.js               # Lógica del buscador específica de index.html
+├── PeluPrincipalAction.js         # Lógica compartida: carrusel, logo, validación de formulario
 ├── PeluPrincipalDesign.css        # Estilos globales del sitio
+|── PeluDesigns/
+    |── Busqueda.css               # Estilos del buscador en general, menos para index.html
+|── PeluJavas/
+    ├── PeluBusquedaIndex.js       # Lógica del buscador específica de index.html
+    ├── PeluBusquedaGeneral.js     # Lógica del buscador para Categorias*.html y PeluPrincipales*.html
 ├── PeluPages/
 │   ├── Principales/
 │   │   ├── PeluDuctos.html        # Catálogo de productos (todas las categorías)
@@ -32,7 +36,7 @@ LosPeluchesDelLado-master/
     ├── Iconos/                    # Logo y favicon
     ├── Imagenes/                  # Imágenes del carrusel principal
     ├── Peluches/                  # Fotos de producto
-    ├── Videos/                    # Video promocional (Snoopy)
+    ├── Videos/                    # Video promocional (Snoopy, Sonic)
     └── Pruebas-Uso Opcional/      # Pruebas de diseño descartadas, no usadas en el sitio
 ```
 
