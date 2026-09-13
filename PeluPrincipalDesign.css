@@ -1,12 +1,13 @@
 body{
   margin: 0;
   padding: 0;
-  min-height: 100vh;
+  min-height: 100%;
   background-image: url('PeluAssets/Fondos/Peluches_Final_Actual.png');
   background-size: cover;
   background-position: center center;
   background-attachment: fixed;
   background-color: #fdf8f5;
+  max-width: 100%;
 }
 
 .content {
@@ -20,7 +21,6 @@ body{
 
 .menu{
   display: grid;
-  width: 10%;
   gap: 10px;
   margin-bottom: 100px;
 }
@@ -100,7 +100,35 @@ body{
 /* --------------------------- */
 /* - Fin SubSección Busqueda - */
 /* --------------------------- */
+.carro-svg{
+  cursor: pointer;
+  pointer-events: visiblePainted;
+}
 
+.fondo-circulo { 
+    fill: #4e3629; 
+}
+
+.mitad-superior { 
+    fill: #896450; /* Color verde oscuro del fondo superior izquierdo */
+}
+
+.sombra-larga { 
+    fill: #1e8449; /* Color verde oscuro de la sombra diagonal */
+    opacity: 0.4;   /* Transparencia de la sombra */
+}
+
+.campana-linea { 
+    fill: none;
+    stroke: #ffffff;    /* Color del trazo de la campana (Blanco) */
+    stroke-width: 24;   /* Grosor de la línea de la campana */
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.campana-badajo {
+    fill: #ffffff;      /* Color de la barrita inferior (Blanco) */
+}
 /* SubSección: Botones */
 /* ------------------- */
 
@@ -127,11 +155,11 @@ body{
 /*       Fin Sección Menu       */
 /*------------------------------*/
 
-@media (max_width: 768px){
+/*@media (max_width: 768px){
   .contenedor{
     width:95%;
   }
-}
+}*/
 
 .button {
   padding: 10px 20px;
