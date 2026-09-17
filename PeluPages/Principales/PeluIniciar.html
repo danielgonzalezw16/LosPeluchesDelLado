@@ -98,32 +98,41 @@
             
             </div>
         <div class="formulario">    
-        <form class="row g-3 needs-validation" novalidate onsubmit="return validacion()">
+        <form class="row g-3 needs-validation" novalidate onsubmit="validacion(event)">
             <div class="col-12">
                 <label for="nombre" class="form-label" style="color: rgb(255, 255, 255);">nombre de usuario</label>
             
             <div class="input-box">
-                <input type="text"  placeholder="ingrese su nombre de usuario para iniciar sesion"  id="nombre" required>
+                <input type="text" class="form-control" placeholder="ejemplo: snoopy" id="nombre" required>
             
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(255, 255, 255)" class="bi bi-person-circle" viewBox="0 0 16 16">
                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
                 <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/> 
             </svg>
 
-        </div>    
-            
+            </div>
+            <div class="invalid-feedback">
+                usuario no encontrado
+            </div>         
+
         </div>
 
             <div class="col-12">
             <label for="contrasena" class="form-label" style="color: rgb(255, 255, 255);">contraseña</label>
             
             <div class="input-box">
-            <input type="password" placeholder="ingrese una contraseña para iniciar sesion" id="contrasena" required>
+            <input type="password" class="form-control" placeholder="ingrese una contraseña" id="contrasena" required>
+
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(255, 255, 255)" class="bi bi-lock-fill" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M8 0a4 4 0 0 1 4 4v2.05a2.5 2.5 0 0 1 2 2.45v5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 13.5v-5a2.5 2.5 0 0 1 2-2.45V4a4 4 0 0 1 4-4m0 1a3 3 0 0 0-3 3v2h6V4a3 3 0 0 0-3-3"/>
                 </svg>
             </div>
+
+            <div class="invalid-feedback">
+                contraseña invalida
+            </div>
         </div>
+
 
 
             <div class="col-12">
