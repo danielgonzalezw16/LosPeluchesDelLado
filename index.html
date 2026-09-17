@@ -25,6 +25,17 @@
             .texto-pastel-blanco{
                 color:rgb(228, 234, 240);
             }
+            .btn-cafe-claro {
+                background-color: #e2a584;
+                color: white;
+            }
+            .btn-cafe-claro:hover {
+                background-color: #a9825e; /* un tono más oscuro para el hover */
+                border-color: #a9825e;
+                color: white;
+                cursor: pointer;
+            }
+
         </style>
 
         <div class="menu w-100 d-flex flex-column gap-1">
@@ -78,8 +89,14 @@
 
                                 <rect class="campana-badajo" x="210" y="365" width="80" height="24" rx="12" />
                             </g>
+                            </svg>
                     </button>
-                    
+                                
+                    <div class="btn-group">
+                    <a href="PeluPages/Principales/PeluIniciar.html" class="btn btn-cafe-claro"  target="_blank" >iniciar sesion</a>
+                    <a href="PeluPages/Principales/PeluCrearCuenta.html" class="btn btn-cafe-claro">crear cuenta</a>
+                    </div>
+
                     <button type="button" class="carrito ms-auto d-block p-0 border-0 bg-transparent text-pastel-cafe align-items-row"
                             style="pointer-events:none;"
                             onclick="window.open('PeluPages/Principales/PeluVentas.html', '_blank')" aria-label="Carro">
@@ -112,7 +129,9 @@
                     </button>
                 </div>
             </div>
-    
+      
+
+
             <ul class="nav nav-justified rounded-5 shadow p-2 small" id="menuNav" style="background-color: #D7C4B7;"> 
                 
                 <!-- Opción 1: Inicio -->
@@ -132,7 +151,7 @@
 
                 <!-- Opción 4: Usuario -->
                 <li class="nav-item">
-                    <a class="nav-link fs-6 fw-semibold text-uppercase text-pastel-cafe" target="_blank" href="PeluPages/Principales/PeluUsuario.html">Usuario</a>
+                    <a class="nav-link fs-6 fw-semibold text-uppercase text-pastel-cafe" target="_blank" href="PeluPages/Principales/PeluSucursales.html">Sucursales</a>
                 </li>
 
             </ul>
