@@ -126,41 +126,60 @@ logo.addEventListener('click', () => {
 });
 
 // formulario del usuario
-function validacion(){
+function validacion(event){
+  event.preventDefault();
   const vLetras = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
-  const nombre = document.getElementById("nombre").value.trim();
-  const apellido = document.getElementById("apellido").value.trim();
-  const correo = document.getElementById("correo").value.trim();
   const vCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  const ciudad = document.getElementById("ciudad").value.trim();
-  const pais = document.getElementById("pais").value.trim();
-  
 
+  const inputNombre = document.getElementById("nombre");
+  const nombre = inputNombre.value.trim();
 
-  if (nombre === "" || !vLetras.test(nombre) ) {
-    alert("Ingrese un nombre válido");
-    document.getElementById("nombre").focus();
+  const inputContrasena = document.getElementById("contrasena");
+  const contrasena = inputContrasena.value.trim();
+
+  const inputContrasenaConf = document.getElementById("contrasenaConf");
+  const contrasenaConf = inputContrasenaConf.value.trim();
+
+  const inputCorreo = document.getElementById("correo");
+  const correo = inputCorreo.value.trim();
+
+  if (nombre === "" || !vLetras.test(nombre)) {
+    inputNombre.classList.add("is-invalid"); // muestra el mensaje de error en html
+    inputNombre.focus();
     return false;
-
-  } else if (apellido === "" || !vLetras.test(apellido) ) {
-    alert("ingrese un apellido válido");
-    document.getElementById("apellido").focus();
-    return false; 
-
-  } else if (correo === "" || !vCorreo.test(correo)) {
-    alert("ingrese un correo válido");
-    document.getElementById("correo").focus();
-    return false; 
-
-  } else if (ciudad.trim() === "" || !vLetras.test(ciudad) ) {
-    alert("ingrese un ciudad válido");
-    document.getElementById("ciudad").focus();
-    return false; 
-
-  } else if (pais.trim() === "" || !vLetras.test(pais) ) {
-    alert("ingrese un pais válido");
-    document.getElementById("pais").focus();
-    return false; 
+  } else {
+    inputNombre.classList.remove("is-invalid");
+    inputNombre.classList.add("is-valid"); //muestra el check verde
   }
+
+  if (contrasena === "") {
+    inputContrasena.classList.add("is-invalid");
+    inputContrasena.focus();
+    return false;
+  } else {
+    inputContrasena.classList.remove("is-invalid");
+    inputContrasena.classList.add("is-valid");
+  }
+
+  if (contrasenaConf === "" || contrasenaConf !== contrasena) {
+    inputContrasenaConf.classList.add("is-invalid");
+    inputContrasenaConf.focus();
+    return false;
+  } else {
+    inputContrasenaConf.classList.remove("is-invalid");
+    inputContrasenaConf.classList.add("is-valid");
+  }
+
+  if (correo === "" || !vCorreo.test(correo)) {
+    inputCorreo.classList.add("is-invalid");
+    inputCorreo.focus();
+    return false;
+  } else {
+    inputCorreo.classList.remove("is-invalid");
+    inputCorreo.classList.add("is-valid");
+  }
+
   return true;
 }
+
+
