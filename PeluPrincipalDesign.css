@@ -159,6 +159,10 @@ body{
   pointer-events: visiblePainted;
 }
 
+.carrito{
+  margin-top:8px;
+}
+
 .fondo-circulo { 
     fill: #4e3629; 
 }
@@ -183,6 +187,35 @@ body{
 .campana-badajo {
     fill: #ffffff;      /* Color de la barrita inferior (Blanco) */
 }
+
+/* --- Efecto para el Fondo Circular --- */
+.campana .fondo-circulo {
+    opacity: 0.4; /* Comienza medio transparente (puedes variar de 0 a 1) */
+    transition: opacity 0.3s ease; /* Transición suave para el cambio */
+}
+
+/* Al poner el mouse encima del botón, el círculo se solidifica */
+.campana:hover .fondo-circulo {
+    opacity: 1; 
+}
+
+/* --- Efecto de Agrandado para la Campana Completa --- */
+.campana {
+    transition: transform 0.2s ease-in-out; /* Suaviza el agrandado */
+}
+
+/* Al poner el mouse encima, se agranda un 15% (1.15) */
+.campana:hover {
+    transform: scale(1.15); 
+}
+
+.init_button {
+  font-family:'Candy Cake',sans-serif;
+  letter-spacing: 2px;
+  margin-left: -10px !important;
+  margin-right: 15px
+}
+
 /* SubSección: Botones */
 /* ------------------- */
 
@@ -373,6 +406,12 @@ button.pelu-arrow{
   font-style: normal;
 }
 
+@font-face {
+    font-family: 'Candy Cake';
+    src: url('PeluAssets/Tipografias/CandyCake.ttf') format('opentype');
+    font-weight: 100 900;
+    font-style: normal;
+}
 
 /*--------------------------*/
 /*     FIN AREA FUENTES     */
