@@ -425,3 +425,13 @@ footer{
   font-family: Arial, sans-serif;
   font-size: 12px;
 }
+/*     titulos     */
+
+.titulo {
+    text-align: center;
+    padding: 40px 0;   /* espacio arriba y abajo */
+}
+.titulo h1 {
+    color: white;
+    margin: 0;
+}
