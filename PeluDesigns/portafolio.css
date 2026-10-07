@@ -18,3 +18,9 @@
     justify-content: center;   /* centra las tarjetas */
     gap: 20px;                 /* espacio entre tarjetas */
 }
+.tarjeta-noticia{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;   /* centra las tarjetas */
+    gap: 20px;                 /* espacio entre tarjetas */
+}
