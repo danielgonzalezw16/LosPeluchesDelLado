@@ -1,9 +1,10 @@
-.intro-portafolio{
+.intro-portafolio {
   padding: 30px 40px;
   border-radius: 10px;
-  max-width: 1000;
-  background-color: #ac2ff580;
+  max-width: 2000px;
   margin: 0 auto;
+  background-color: #ac2ff580;
+  text-align: center;
 }
 
 .foto-perfil {
