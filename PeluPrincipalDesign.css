@@ -161,6 +161,11 @@ body{
 
 .carrito{
   margin-top:8px;
+  transition: transform 0.2s 
+}
+
+.carrito:hover {
+  transform: scale(1.15)
 }
 
 .fondo-circulo { 
@@ -178,35 +183,74 @@ body{
 
 .campana-linea { 
     fill: none;
-    stroke: #ffffff;    /* Color del trazo de la campana (Blanco) */
-    stroke-width: 24;   /* Grosor de la línea de la campana */
+    stroke: #4e3629;    /* Color del trazo de la campana (Blanco) */
+    stroke-width: 24;      /* Grosor Linea */
     stroke-linecap: round;
     stroke-linejoin: round;
 }
 
 .campana-badajo {
-    fill: #ffffff;      /* Color de la barrita inferior (Blanco) */
+    fill: #4e3629;    
 }
 
 /* --- Efecto para el Fondo Circular --- */
+
 .campana .fondo-circulo {
-    opacity: 0.4; /* Comienza medio transparente (puedes variar de 0 a 1) */
-    transition: opacity 0.3s ease; /* Transición suave para el cambio */
+    opacity: 0; 
+    transition: opacity 0.3s ease; 
 }
 
-/* Al poner el mouse encima del botón, el círculo se solidifica */
+/* Solidificación */
 .campana:hover .fondo-circulo {
     opacity: 1; 
 }
 
 /* --- Efecto de Agrandado para la Campana Completa --- */
 .campana {
-    transition: transform 0.2s ease-in-out; /* Suaviza el agrandado */
+    transition: transform 0.2s ease-in-out; 
 }
 
-/* Al poner el mouse encima, se agranda un 15% (1.15) */
 .campana:hover {
     transform: scale(1.15); 
+}
+
+.campana:hover .campana-linea{
+  stroke: #ffffff;
+}
+
+.campana:hover .campana-badajo{
+  fill: #ffffff;
+}
+
+.num-notis{
+    position: absolute;
+    top: 7px;                  
+    right: 11px;                
+    background-color: #ffffff; 
+    color: #4e3629;       
+    font-size: 11px;  
+    font-weight: bold;
+    font-family: sans-serif;
+    
+    /* Forzar Círculo */
+    min-width: 18px;
+    height: 18px;
+    border-radius: 50px;    
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Espacio por si es mas de 9*/
+    padding: 0 4px; 
+    box-sizing: border-box;
+
+    z-index: 10;
+    transition: transform 0.2s ease;
+}
+
+.campana:hover .num-notis{
+    transform:translate(6px, -2px);
 }
 
 .init_button {
