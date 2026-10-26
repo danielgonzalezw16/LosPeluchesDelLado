@@ -1,5 +1,6 @@
 // SECCION PRINCIPAL ANUNCIOS
 // --------------------------
+
 // Son las Constantes para Ambos Botones
 const antesPrincipal = document.getElementById('p-izq');
 const despuesPrincipal = document.getElementById('p-der');
@@ -9,31 +10,22 @@ const imgs = Array.from(document.querySelectorAll('.pelu-item'));
 const tiposImgs = ['item-left', 'item-center', 'item-right','item-faraway'];
 
 // Lista para los Ids y cambiar su funcion
-const tiposIds = ['Pokemon','Snoopy','Anime','Sonic']
+const tiposIds = ['Pokemon','Snoopy','Anime','Sonic'];
 
 // Es la funcion para Actualizar cada vez que cambian de posicion
 function nuevoGanador() {
   imgs.forEach((img, index) => {
-
-    img.classList.remove('efecto')
-    // Agregamos 'cambio' a la clase para que se sepa que esta en transicion
+    img.classList.remove('efecto');
     img.classList.add('cambio');
 
-    // Quitamos todas las clases que haya
     img.classList.remove('item-left', 'item-center', 'item-right','item-faraway');
-
-    // Ponemos la nueva clase que esta ahora, en el Array
     img.classList.add(tiposImgs[index]);
-
-    // Cambiamos el ID de la imagen por su ID real
-    img.id=tiposIds[index];
+    img.id = tiposIds[index];
 
     setTimeout(() => {
       img.classList.remove('cambio');
-      // Por si pone el mouse al medio mientras aun esta en transicion, el matches es para saber si esta
-      // pasando lo del parentesis, en este caso ':hover', que es si tienes el mouse encima
       if (img.classList.contains('item-center') && img.matches(':hover')) {
-                img.classList.add('efecto');
+        img.classList.add('efecto');
       }
     }, 490); 
   });
@@ -41,7 +33,6 @@ function nuevoGanador() {
 
 // Funcion para Actualizar el Click en las imagenes
 function nuevoClickeador() {
-    // Diccionario para las imagenes
     const peluches = {
       Pokemon: 'PeluPages/Categorias/Categoria_Pokemon.html',
       Snoopy: 'PeluPages/Categorias/Categoria_Snoopys.html',
@@ -49,107 +40,93 @@ function nuevoClickeador() {
       Sonic: 'PeluPages/Categorias/Categoria_Sonic.html'
     };
 
-    // Ciclo para el URL de las imagenes
     for (const id in peluches) {
       const img = document.getElementById(id);
       if (img) {
         img.addEventListener('click', () => {
-        if (img.className.split(' ').includes('item-center')){
-          img.style.cursor = 'pointer'; // para que se vea clickeable
-          
+          if (img.className.split(' ').includes('item-center')){
+            img.style.cursor = 'pointer';
             window.open(peluches[id]);
-          
-
-        } else if (img.className.split(' ').includes('item-left')){
+          } else if (img.className.split(' ').includes('item-left')){
             img.style.cursor = 'pointer';
-            
-              const primImg = tiposImgs.shift(); //Para ver la primera
-              tiposImgs.push(primImg); //Para colocar el elemento al final
-              nuevoGanador();
-            
-
-        } else if (img.className.split(' ').includes('item-right')){
+            const primImg = tiposImgs.shift();
+            tiposImgs.push(primImg);
+            nuevoGanador();
+          } else if (img.className.split(' ').includes('item-right')){
             img.style.cursor = 'pointer';
-            
-              const ultImg = tiposImgs.pop(); // pop es para ver la ultima
-              tiposImgs.unshift(ultImg); // Agrega un elemento al principio
-              nuevoGanador();
-            } 
+            const ultImg = tiposImgs.pop();
+            tiposImgs.unshift(ultImg);
+            nuevoGanador();
+          } 
         });
 
-        // Para si el mouse esta encima
         img.addEventListener('mouseenter', () => {
           if (img.classList.contains('item-center') && !img.classList.contains('cambio')) {
               img.classList.add('efecto');
           }
         });
         
-        // Para si el mouse esta fuera
         img.addEventListener('mouseleave', () => {
           img.classList.remove('efecto');
         });
       }
-    };
-   
-};
+    }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
-
-
   nuevoClickeador();
-  
 
-  // Evento para cuando se mueve a la derecha
-  despuesPrincipal.addEventListener('click', () => {
-    // Sacamos la ultima para ponerla al principio
-    const ultImg = tiposImgs.pop(); // pop es para ver la ultima
-    tiposImgs.unshift(ultImg); // Agrega un elemento al principio
-    nuevoGanador();
-    
-  });
+  if (despuesPrincipal) {
+    despuesPrincipal.addEventListener('click', () => {
+      const ultImg = tiposImgs.pop();
+      tiposImgs.unshift(ultImg);
+      nuevoGanador();
+    });
+  }
 
-  // Evento para la flecha Izquierda (Retroceder)
-  antesPrincipal.addEventListener('click', () => {
-    // Quitamos la primera para ponerla al final
-    const primImg = tiposImgs.shift(); //Para ver la primera
-    tiposImgs.push(primImg); //Para colocar el elemento al final
-    nuevoGanador();
-    
-  });
-  
+  if (antesPrincipal) {
+    antesPrincipal.addEventListener('click', () => {
+      const primImg = tiposImgs.shift();
+      tiposImgs.push(primImg);
+      nuevoGanador();
+    });
+  }
 });
 
 const logo = document.getElementById("logo");
+if (logo) {
+  logo.addEventListener('click', () => {
+      window.open("index.html",'_blank');
+  });
+}
 
-logo.addEventListener('click', () => {
-    window.open("index.html",'_blank');
-});
-
-// formulario del usuario
+// ==========================================
+// FORMULARIO DE USUARIO (REGISTRO)
+// ==========================================
 function validacion(event){
   event.preventDefault();
   const vLetras = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
   const vCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   const inputNombre = document.getElementById("nombre");
-  const nombre = inputNombre.value.trim();
+  const nombre = inputNombre ? inputNombre.value.trim() : "";
 
   const inputContrasena = document.getElementById("contrasena");
-  const contrasena = inputContrasena.value.trim();
+  const contrasena = inputContrasena ? inputContrasena.value.trim() : "";
 
   const inputContrasenaConf = document.getElementById("contrasenaConf");
-  const contrasenaConf = inputContrasenaConf.value.trim();
+  const contrasenaConf = inputContrasenaConf ? inputContrasenaConf.value.trim() : "";
 
   const inputCorreo = document.getElementById("correo");
-  const correo = inputCorreo.value.trim();
+  const correo = inputCorreo ? inputCorreo.value.trim() : "";
 
   if (nombre === "" || !vLetras.test(nombre)) {
-    inputNombre.classList.add("is-invalid"); // muestra el mensaje de error en html
+    inputNombre.classList.add("is-invalid");
     inputNombre.focus();
     return false;
   } else {
     inputNombre.classList.remove("is-invalid");
-    inputNombre.classList.add("is-valid"); //muestra el check verde
+    inputNombre.classList.add("is-valid");
   }
 
   if (contrasena === "") {
@@ -179,7 +156,69 @@ function validacion(event){
     inputCorreo.classList.add("is-valid");
   }
 
+  // Obtenemos o creamos la base de datos local
+  let usuarios = JSON.parse(localStorage.getItem("usuariosDB")) || [];
+  const nuevoUsuario = { nombre, correo, contrasena };
+
+  // Comprobar si ya existe el correo
+  const existe = usuarios.some(u => u.correo === correo);
+  if (existe) {
+    alert("Este correo ya se encuentra registrado. Intenta iniciar sesión.");
+    return false;
+  }
+
+  // Guardar usuario en la lista
+  usuarios.push(nuevoUsuario);
+  localStorage.setItem("usuariosDB", JSON.stringify(usuarios));
+
+  // Iniciar sesión activa con el nuevo usuario
+  localStorage.setItem("usuarioLogueado", JSON.stringify(nuevoUsuario));
+
+  alert("¡Registro exitoso! Redirigiendo a tu perfil...");
+  window.location.href = "PeluUsuario.html";
   return true;
 }
 
+// ==========================================
+// FORMULARIO DE INICIO DE SESIÓN (LOGIN)
+// ==========================================
+function loginUsuario(event) {
+  event.preventDefault();
 
+  const usuarioInput = document.getElementById("correoLogin").value.trim();
+  const passInput = document.getElementById("passLogin").value.trim();
+  const errorElement = document.getElementById("errorLogin");
+
+  const usuarios = JSON.parse(localStorage.getItem("usuariosDB")) || [];
+
+  // Buscar coincidencia por nombre o por correo
+  const usuarioEncontrado = usuarios.find(
+    u => (u.correo === usuarioInput || u.nombre === usuarioInput) && u.contrasena === passInput
+  );
+
+  if (usuarioEncontrado) {
+    localStorage.setItem("usuarioLogueado", JSON.stringify(usuarioEncontrado));
+    if (errorElement) errorElement.classList.add("d-none");
+
+    window.location.href = "PeluUsuario.html";
+  } else {
+    if (errorElement) errorElement.classList.remove("d-none");
+  }
+}
+
+// ==========================================
+// CAMBIAR BOTONES DEL MENU SI HAY SESIÓN ACTIVA
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+  const usuarioActivo = JSON.parse(localStorage.getItem("usuarioLogueado"));
+  const contenedorBotones = document.querySelector(".init_button");
+
+  if (usuarioActivo && contenedorBotones) {
+    const esPaginaPrincipal = window.location.pathname.endsWith("index.html") || window.location.pathname === "/";
+    const rutaPerfil = esPaginaPrincipal ? "PeluPages/Principales/PeluUsuario.html" : "PeluUsuario.html";
+
+    contenedorBotones.innerHTML = `
+      <a href="${rutaPerfil}" class="btn btn-cafe-claro fs-5">Hola, ${usuarioActivo.nombre.split(' ')[0]}</a>
+    `;
+  }
+});
