@@ -1,23 +1,17 @@
 // SECCION PRINCIPAL ANUNCIOS
 // --------------------------
 
-// Son las Constantes para Ambos Botones
 const antesPrincipal = document.getElementById('p-izq');
 const despuesPrincipal = document.getElementById('p-der');
 
-// Es la lista para las imagenes y guardar el orden
 const imgs = Array.from(document.querySelectorAll('.pelu-item'));
 const tiposImgs = ['item-left', 'item-center', 'item-right','item-faraway'];
-
-// Lista para los Ids y cambiar su funcion
 const tiposIds = ['Pokemon','Snoopy','Anime','Sonic'];
 
-// Es la funcion para Actualizar cada vez que cambian de posicion
 function nuevoGanador() {
   imgs.forEach((img, index) => {
     img.classList.remove('efecto');
     img.classList.add('cambio');
-
     img.classList.remove('item-left', 'item-center', 'item-right','item-faraway');
     img.classList.add(tiposImgs[index]);
     img.id = tiposIds[index];
@@ -31,7 +25,6 @@ function nuevoGanador() {
   });
 }
 
-// Funcion para Actualizar el Click en las imagenes
 function nuevoClickeador() {
     const peluches = {
       Pokemon: 'PeluPages/Categorias/Categoria_Pokemon.html',
@@ -73,8 +66,42 @@ function nuevoClickeador() {
     }
 }
 
+// ==========================================
+// USUARIOS PERMANENTES (INICIALIZACIÓN)
+// ==========================================
+function cargarUsuariosPredefinidos() {
+  let usuarios = JSON.parse(localStorage.getItem("usuariosDB")) || [];
+
+  // Lista de usuarios semilla que estarán siempre por defecto
+  const usuariosSemilla = [
+    {
+      nombre: "sonic",
+      correo: "sonic@gmail.com",
+      contrasena: "sonyc",
+      rol: "user"
+    },
+    {
+      nombre: "shadow",
+      correo: "shodow.exe@gmail.com",
+      contrasena: "123456",
+      rol: "admin"
+    }
+  ];
+
+  // Insertar solo si no existen previamente en la lista
+  usuariosSemilla.forEach(usuarioBase => {
+    const yaExiste = usuarios.some(u => u.correo === usuarioBase.correo);
+    if (!yaExiste) {
+      usuarios.push(usuarioBase);
+    }
+  });
+
+  localStorage.setItem("usuariosDB", JSON.stringify(usuarios));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   nuevoClickeador();
+  cargarUsuariosPredefinidos(); // Carga automática de usuarios permanentes
 
   if (despuesPrincipal) {
     despuesPrincipal.addEventListener('click', () => {
@@ -156,25 +183,21 @@ function validacion(event){
     inputCorreo.classList.add("is-valid");
   }
 
-  // Obtenemos o creamos la base de datos local
   let usuarios = JSON.parse(localStorage.getItem("usuariosDB")) || [];
-  const nuevoUsuario = { nombre, correo, contrasena };
+  
+  // Por defecto, todo nuevo usuario registrado es 'user'
+  const nuevoUsuario = { nombre, correo, contrasena, rol: "user" };
 
-  // Comprobar si ya existe el correo
   const existe = usuarios.some(u => u.correo === correo);
   if (existe) {
     alert("Este correo ya se encuentra registrado. Intenta iniciar sesión.");
     return false;
   }
 
-  // Guardar usuario en la lista
   usuarios.push(nuevoUsuario);
   localStorage.setItem("usuariosDB", JSON.stringify(usuarios));
-
-  // Iniciar sesión activa con el nuevo usuario
   localStorage.setItem("usuarioLogueado", JSON.stringify(nuevoUsuario));
 
-  alert("¡Registro exitoso! Redirigiendo a tu perfil...");
   window.location.href = "PeluUsuario.html";
   return true;
 }
@@ -191,7 +214,6 @@ function loginUsuario(event) {
 
   const usuarios = JSON.parse(localStorage.getItem("usuariosDB")) || [];
 
-  // Buscar coincidencia por nombre o por correo
   const usuarioEncontrado = usuarios.find(
     u => (u.correo === usuarioInput || u.nombre === usuarioInput) && u.contrasena === passInput
   );
@@ -214,11 +236,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const contenedorBotones = document.querySelector(".init_button");
 
   if (usuarioActivo && contenedorBotones) {
-    const esPaginaPrincipal = window.location.pathname.endsWith("index.html") || window.location.pathname === "/";
+    const esPaginaPrincipal = window.location.pathname.endsWith("index.html") || window.location.pathname === "/" || window.location.pathname === "";
     const rutaPerfil = esPaginaPrincipal ? "PeluPages/Principales/PeluUsuario.html" : "PeluUsuario.html";
 
+    // Si es Administrador muestra la etiqueta (Admin)
+    const textoBoton = usuarioActivo.rol === "admin" 
+      ? `Hola, ${usuarioActivo.nombre.split(' ')[0]} (Admin)` 
+      : `Hola, ${usuarioActivo.nombre.split(' ')[0]}`;
+
     contenedorBotones.innerHTML = `
-      <a href="${rutaPerfil}" class="btn btn-cafe-claro fs-5">Hola, ${usuarioActivo.nombre.split(' ')[0]}</a>
+      <a href="${rutaPerfil}" class="btn btn-cafe-claro fs-5">${textoBoton}</a>
     `;
   }
 });
