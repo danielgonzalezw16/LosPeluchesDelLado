@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="">
+
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +13,6 @@
         <script src="../../PeluPrincipalAction.js" defer></script>
         <title>Registro</title>
         <link rel="icon" type="image/x-icon" href="../../PeluAssets/Iconos/Logo - copia.ico">
-
     </head>
 
     <body>
@@ -79,107 +79,103 @@
                     <a class="nav-link fs-6 fw-semibold text-uppercase text-pastel-cafe " target="_blank" href="PeluDuctos.html">Productos</a>
                 </li>
                 
-                <!-- Opción 3: Ventas -->
-                <li class="nav-item">
-                    <a class="nav-link fs-6 fw-semibold text-uppercase text-pastel-cafe" target="_blank" href="PeluVentas.html">Ventas</a>
-                </li>
-                
-                <!-- Opción 4: Historial -->
+                <!-- Opción 3: Historial -->
                 <li class="nav-item">
                     <a class="nav-link fs-6 fw-semibold text-uppercase text-pastel-cafe" target="_blank" href="PeluHistorial.html">Historial</a>
                 </li>
 
-                <!-- Opción 5: Usuario -->
+                <!-- Opción 4: Sucursales -->
                 <li class="nav-item">
                     <a class="nav-link fs-6 fw-semibold text-uppercase text-pastel-cafe" target="_blank" href="PeluSucursales.html">Sucursales</a>
                 </li>
 
             </ul>
             
-            </div>
+        </div>
         <div class="formulario">    
-        <form class="row g-3 needs-validation" novalidate onsubmit="validacion(event)">
-            <div class="col-12">
-                <label for="nombre" class="form-label" style="color: rgb(255, 255, 255);">nombre de usuario</label>
-            
-            <div class="input-box">
-                <input type="text" class="form-control" placeholder="ejemplo: snoopy" id="nombre" required>
-            
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(255, 255, 255)" class="bi bi-person-circle" viewBox="0 0 16 16">
-                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/> 
-            </svg>
+            <form class="row g-3 needs-validation" novalidate onsubmit="validacion(event)">
+                <div class="col-12">
+                    <label for="nombre" class="form-label" style="color: rgb(255, 255, 255);">Nombre de Usuario</label>
 
-            </div>
-            <div class="invalid-feedback">
-                ingrese un nombre de usuario valido
-            </div>         
-
-        </div>
-
-            <div class="col-12">
-            <label for="contrasena" class="form-label" style="color: rgb(255, 255, 255);">contraseña</label>
-            
-            <div class="input-box">
-            <input type="password" class="form-control" placeholder="ingrese una contraseña" id="contrasena" required>
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(255, 255, 255)" class="bi bi-lock-fill" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8 0a4 4 0 0 1 4 4v2.05a2.5 2.5 0 0 1 2 2.45v5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 13.5v-5a2.5 2.5 0 0 1 2-2.45V4a4 4 0 0 1 4-4m0 1a3 3 0 0 0-3 3v2h6V4a3 3 0 0 0-3-3"/>
-                </svg>
-            </div>
-
-            <div class="invalid-feedback">
-                ingrese una contraseña
-            </div>
-        </div>
-
-            <div class="col-12">
-            <label for="contrasenaConf" class="form-label" style="color: rgb(255, 255, 255);">confirme su contraseña</label>
-            
-            <div class="input-box">
-            <input type="password" class="form-control" placeholder="confirme su contraseña"  id="contrasenaConf" required>
-            
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(255, 255, 255)" class="bi bi-lock-fill" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8 0a4 4 0 0 1 4 4v2.05a2.5 2.5 0 0 1 2 2.45v5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 13.5v-5a2.5 2.5 0 0 1 2-2.45V4a4 4 0 0 1 4-4m0 1a3 3 0 0 0-3 3v2h6V4a3 3 0 0 0-3-3"/>
-                </svg>
-            </div>
-
-            <div class="invalid-feedback">
-                las contraseñas no coinciden
-            </div>
-        </div>
-
-            <div class="col-12">
-            <label for="correo" class="form-label" style="color: rgb(255, 255, 255);">correo</label>
-            <div class="input-group has-validation">
-                <span class="input-group-text" id="inputGroupPrepend">@</span>
-            
-            <div class="input-box">    
-                <input type="text" class="form-control" placeholder="correo@ejemplo.cl"  id="correo" aria-describedby="inputGroupPrepend" required>
-                </div>
+                    <div class="input-box">
+                        <input type="text" class="form-control" placeholder="ejemplo: snoopy" id="nombre" required>
                 
-            <div class="invalid-feedback">
-                ingrese un correo valido
-            </div> 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(255, 255, 255)" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/> 
+                        </svg>
 
-            </div>
-        </div>
-        <form id="formRegistro" onsubmit="return validacion(event)">
+                    </div>
+                    <div class="invalid-feedback">
+                        ingrese un nombre de usuario valido
+                    </div>         
 
-         <button type="submit" class="btn btn-cafe-claro">Crear Cuenta</button>
-        </form>
+                </div>
 
+                <div class="col-12">
+                    <label for="contrasena" class="form-label" style="color: rgb(255, 255, 255);">Contraseña</label>
+                    
+                    <div class="input-box">
+                        <input type="password" class="form-control" placeholder="ingrese una contraseña" id="contrasena" required>
 
-            <div class="col-12">
-            <button class="btn bg-white"  type="submit">crear cuenta</button>
-            </div>
-        </form>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(255, 255, 255)" class="bi bi-lock-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 0a4 4 0 0 1 4 4v2.05a2.5 2.5 0 0 1 2 2.45v5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 13.5v-5a2.5 2.5 0 0 1 2-2.45V4a4 4 0 0 1 4-4m0 1a3 3 0 0 0-3 3v2h6V4a3 3 0 0 0-3-3"/>
+                        </svg>
+                    </div>
+
+                    <div class="invalid-feedback">
+                        Ingrese una Contraseña
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label for="contrasenaConf" class="form-label" style="color: rgb(255, 255, 255);">Confirme su contraseña</label>
+                    
+                    <div class="input-box">
+                        <input type="password" class="form-control" placeholder="confirme su contraseña"  id="contrasenaConf" required>
+                        
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(255, 255, 255)" class="bi bi-lock-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 0a4 4 0 0 1 4 4v2.05a2.5 2.5 0 0 1 2 2.45v5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 13.5v-5a2.5 2.5 0 0 1 2-2.45V4a4 4 0 0 1 4-4m0 1a3 3 0 0 0-3 3v2h6V4a3 3 0 0 0-3-3"/>
+                        </svg>
+                    </div>
+
+                    <div class="invalid-feedback">
+                        las contraseñas no coinciden
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label for="correo" class="form-label" style="color: rgb(255, 255, 255);">correo</label>
+
+                    <div class="input-group has-validation">
+                        <span class="input-group-text" id="inputGroupPrepend">@</span>
+                    
+                        <div class="input-box">    
+                            <input type="text" class="form-control" placeholder="correo@ejemplo.cl"  id="correo" aria-describedby="inputGroupPrepend" required>
+                        </div>
+                        
+                        <div class="invalid-feedback">
+                            ingrese un correo valido
+                        </div> 
+
+                    </div>
+                </div>
+
+                <form id="formRegistro" onsubmit="return validacion(event)">
+                    <button type="submit" class="btn btn-cafe-claro"> Crear Cuenta </button>
+                </form>
+
+                <div class="col-12">
+                    <button class="btn bg-white" type="submit"> Crear Cuenta </button>
+                </div>
+            </form>
+
         </div>
 
         <footer>
             <p>Grupo 8 de Jovenes Vendedores</p>
             <p>&copy; 2026 Lo Quieres, Te lo Vendo. Todos los Derechos Reservados</p>
         </footer>
+        
     </body>
-
 </html>
