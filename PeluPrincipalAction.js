@@ -76,13 +76,22 @@ function cargarUsuariosPredefinidos() {
   const usuariosSemilla = [
     {
       nombre: "sonic",
-      correo: "sonic@gmail.com",
-      contrasena: "sonyc",
+      correo: "sonic.unleashed@sega.com",
+      contrasena: "sonicgraciasporhacermesonreir",
       rol: "user"
-    },
-    {
+    },{
+      nombre: "Pepe",
+      correo: "pepe.aguilarc@gmail.com",
+      contrasena: "pepito15",
+      rol: "user"
+    },{
+      nombre: "Jadeicent",
+      correo: "pastelss@plushe.cl",
+      contrasena: "somosadmin",
+      rol:"admin"
+    },{
       nombre: "shadow",
-      correo: "shodow.exe@gmail.com",
+      correo: "shadow.exe@sega.com",
       contrasena: "123456",
       rol: "admin"
     }
