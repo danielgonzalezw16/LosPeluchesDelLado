@@ -21,8 +21,11 @@
         </style>
         
         <div class="menu w-100 d-flex flex-column gap-1">
+
             <div class="borde_inicial d-flex align-items-center rounded-5 shadow p-2" style="background-color: #D7C4B7;">
+
                 <div class="col-4 justify-content-left align-items-center" style="padding-left: 40px;">
+
                     <form class="busqueda search-box d-flex align-items-center rounded-5 px-3 py-1" id="busquedaIndex">
                         <input 
                             type="text" 
@@ -30,26 +33,34 @@
                             placeholder="Buscar..." 
                             id="barraBusquedaIndex"
                         ></input>
+
                         <ul class = "sugerencias_busquedaIndex">
                             <li>Sugerencia</li>
                         </ul>
                         
                         <div class="separador mx-2"></div>
                         <button type="submit" class="lupita p-0 border-0 bg-transparent text-pastel-cafe d-flex align-items-center" aria-label="Buscar">
+                            
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" 
                                 viewBox="0 0 24 24" fill="none" 
                                 stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                             >
                                 <circle cx="11" cy="11" r="8"></circle>
                                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+
                             </svg>
                         </button>
+
                     </form>
+
                 </div>
+
                 <div class="logo_co col-4 d-flex justify-content-center align-items-center">
                     <img id="logo" class="logo" src="../../PeluAssets/Iconos/Logo.png" alt="logo" >
                 </div>
-                 <div class="col-4 d-flex ms-auto" style="justify-content: end;">
+
+                <div class="col-4 d-flex ms-auto" style="justify-content: end;">
+
                     <button type="button" class="campana border-0 bg-transparent position-relative p-1 text-pastel-cafe align-items-row"
                             style="pointer-events:auto;"
                             onclick="window.open('PeluPages/Principales/PeluNotificaciones.html', '_blank')" aria-label="Campana">
@@ -149,17 +160,17 @@
         <div class="container d-flex justify-content-center mt-5 mb-5">
             <div class="col-md-8 col-lg-6">
                 <div class="p-4 shadow-lg rounded-4 bg-white">
-                    <h2 class="text-pastel-cafe text-center mb-4 fw-bold">Mis Compras</h2>
+                    <h2 class="text-pastel-cafe text-center mb-4 fw-bold">Todas Mis Compras</h2>
                     
-                    <!-- Aquí se inyectarán las compras mediante JS -->
+                    <!-- JSON para Mostrar -->
                     <div id="contenedorHistorial" class="d-flex flex-column gap-3">
                         <!-- Mensaje de carga inicial -->
-                        <p class="text-center text-muted">Cargando historial...</p>
+                        <p class="text-center text-muted">Cargando Compras...</p>
                     </div>
 
                     <div class="mt-4 pt-3 border-top text-center">
                         <p style="font-size:14px; line-height: 1.6; color: #6c757d;">
-                            Este emprendimiento está enfocado en la Compra y Venta de Peluches, ubicado en Santiago de Chile. ¡Gracias por confiar en nosotros!
+                            Pastels Plushes está enfocado en Compra y Venta de Peluches, nos encontramos en Santiago de Chile. ¡Gracias por confiar en nosotros!
                         </p>
                     </div>
                 </div>
@@ -174,35 +185,38 @@
         <!-- SCRIPT PARA RENDERIZAR EL HISTORIAL -->
         <script>
             document.addEventListener('DOMContentLoaded', () => {
-                // Recuperar datos de la sesión/almacenamiento local
+
+                // Obtenemos los Datos de la Sesión/Almacenamiento Local
                 const historial = JSON.parse(localStorage.getItem('ventasRealizadas')) || [];
                 const contenedor = document.getElementById('contenedorHistorial');
                 
-                contenedor.innerHTML = ''; // Limpiar mensaje de carga
+                contenedor.innerHTML = ''; // Limpiamos el Mensaje de Carga
                 
                 if(historial.length === 0) {
                     contenedor.innerHTML = `
                         <div class="text-center p-4">
-                            <h5 class="text-muted">Aún no has comprado ningún peluche.</h5>
-                            <a href="PeluVentas.html" class="btn btn-sm mt-2 text-white" style="background-color: #4e3629;">Ir a Ventas</a>
+                            <h5 class="text-muted">Aún no compras algún Peluche Pastel.</h5>
+                            <a href="PeluVentas.html" class="btn btn-sm mt-2 text-white" style="background-color: #4e3629;">Ir al Carro</a>
                         </div>`;
                     return;
                 }
                 
-                // Generar lista de tarjetas para cada compra
+                // Generamos la lista de tarjetas para cada compra
                 historial.reverse().forEach(venta => {
-                    // Darle formato a la moneda
+                    // Damos Formato a la Moneda
                     const precioFormateado = new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(venta.precio);
 
                     contenedor.innerHTML += `
                         <div class="card border-0 shadow-sm" style="background-color: #faf7f5; border-left: 5px solid #D7C4B7 !important;">
                             <div class="card-body">
+
                                 <h5 class="card-title text-pastel-cafe fw-bold">${venta.producto}</h5>
                                 <h6 class="card-subtitle mb-2 text-secondary small"><i class="bi bi-calendar"></i> ${venta.fecha}</h6>
                                 <p class="card-text mb-1 text-success fw-semibold">Total: ${precioFormateado}</p>
                                 <p class="card-text mb-0 text-muted" style="font-size: 0.85rem;">
-                                    Pagado con tarjeta de ${venta.tipoTarjeta} terminada en ****${venta.ultimosDigitos}
+                                    Pagado con Tarjeta de ${venta.tipoTarjeta} terminada en ****${venta.ultimosDigitos}
                                 </p>
+
                             </div>
                         </div>
                     `;
