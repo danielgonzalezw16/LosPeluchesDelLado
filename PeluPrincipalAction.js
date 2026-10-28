@@ -190,7 +190,7 @@ function validacion(event){
 
   const existe = usuarios.some(u => u.correo === correo);
   if (existe) {
-    alert("Este correo ya se encuentra registrado. Intenta iniciar sesión.");
+    alert("Este correo ya se encuentra registrado. Intenta Iniciar Sesión.");
     return false;
   }
 
@@ -231,6 +231,7 @@ function loginUsuario(event) {
 // ==========================================
 // CAMBIAR BOTONES DEL MENU SI HAY SESIÓN ACTIVA
 // ==========================================
+
 document.addEventListener("DOMContentLoaded", () => {
   const usuarioActivo = JSON.parse(localStorage.getItem("usuarioLogueado"));
   const contenedorBotones = document.querySelector(".init_button");
@@ -241,7 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Si es Administrador muestra la etiqueta (Admin)
     const textoBoton = usuarioActivo.rol === "admin" 
-      ? `Hola, ${usuarioActivo.nombre.split(' ')[0]} (Admin)` 
+      ? `${usuarioActivo.nombre.split(' ')[0]} | Admin |` 
       : `Hola, ${usuarioActivo.nombre.split(' ')[0]}`;
 
     contenedorBotones.innerHTML = `
