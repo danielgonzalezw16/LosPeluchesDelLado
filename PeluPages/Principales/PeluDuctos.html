@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../../PeluDesigns/BusquedaGeneral.css">
+        <link rel="stylesheet" href="../../PeluPrincipalDesign.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+        <script src="../../PeluJavas/PeluBusquedaGeneral.js" defer></script>
+        <script src="../../PeluPrincipalAction.js" defer></script>
+        <title>Product Plushes</title>
+        <link rel="icon" type="image/x-icon" href="../../PeluAssets/Iconos/Logo - copia.ico">
+    </head>
+
+    <body style="background-color: #f4ece6;">
+
+        <style>
+            .text-pastel-cafe { color: #4e3629; }
+            .texto-pastel-cafe-claro { color:rgb(214, 164, 102); }
+            .producto-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+            .producto-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important; }
+            .btn-info-prod { background-color: #D7C4B7; color: #4e3629; font-weight: 600; }
+            .btn-info-prod:hover { background-color: #c4ae9d; color: #4e3629; }
+            .btn-add-cart { background-color: #4e3629; color: white; font-weight: 600; }
+            .btn-add-cart:hover { background-color: #3b281f; color: white; }
+        </style>
+
+        <div class="menu w-100 d-flex flex-column gap-1">
+            <div class="borde_inicial d-flex align-items-center rounded-5 shadow p-2" style="background-color: #D7C4B7;">
+
+                <div class="col-4 justify-content-left align-items-center" style="padding-left: 40px;">
+                    <form class="busqueda search-box d-flex align-items-center rounded-5 px-3 py-1" id="busquedaIndex">
+                        <input type="text" class="search-input border-0 rounded-5 px-3 py-1 shadow-none" placeholder="Buscar..." id="barraBusquedaIndex">
+                        <ul class="sugerencias_busquedaIndex"><li>Sugerencia</li></ul>
+                        <div class="separador mx-2"></div>
+                        <button type="submit" class="lupita p-0 border-0 bg-transparent text-pastel-cafe d-flex align-items-center" aria-label="Buscar">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="logo_co col-4 d-flex justify-content-center align-items-center">
+                    <img id="logo" class="logo" src="../../PeluAssets/Iconos/Logo.png" alt="logo">
+                </div>
+
+                 <div class="col-4 d-flex ms-auto" style="justify-content: end;">
+                    <button type="button" 
+                            class="campana border-0 bg-transparent position-relative p-1 text-pastel-cafe align-items-row" 
+                            style="pointer-events:auto;" 
+                            onclick="window.open('PeluPages/Principales/PeluNotificaciones.html', '_blank')" aria-label="Campana">
+                        <svg xmlns="http://w3.org" viewBox="2000 0 500 500" width="52" height="52">
+                            <g transform="translate(2000, 0)">
+                                <circle class="fondo-circulo" cx="250" cy="250" r="210" />
+                                <path class="fondo-circulo mitad-superior" d="M 101.4 398.6 A 210 210 0 0 1 398.6 101.4 Z" />
+                                <path class="campana-linea" d="M 170,335 C 170,335 155,335 155,320 C 155,305 180,290 180,200 A 70,70 0 0,1 320,200 C 320,290 345,305 345,320 C 345,335 330,335 330,335 Z" />
+                                <rect class="campana-badajo" x="210" y="365" width="80" height="24" rx="16" />
+                            </g>
+                        </svg>
+                        <span class="num-notis badge-notificacion">3</span>
+                    </button>
+
+                    <button type="button" class="carrito d-flex p-0 border-0 bg-transparent text-pastel-cafe" 
+                            style="pointer-events:none;" onclick="window.open('PeluVentas.html', '_blank')" aria-label="Carro">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="75" height="41" viewBox="460 0 50 45" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon class="carro-svg" points="450,18 495,18 489,43 456,43" fill="transparent"></polygon>
+                            <line class="carro-svg" x1="460" y1="10" x2="485" y2="10"></line>
+                            <line class="carro-svg" x1="455" y1="18" x2="460" y2="10"></line> 
+                            <line class="carro-svg" x1="490" y1="18" x2="485" y2="10"></line>
+                            <circle class="carro-svg" cx="480" cy="30" r="5" fill="rgb(228, 234, 240)"></circle>
+                            <circle class="carro-svg" cx="465" cy="30" r="5" fill="rgb(228, 234, 240)"></circle>
+                            <rect class="carro-svg" x="465" y="7" width="15" height="6" rx="2" ry="2" fill="#ffe2c7"></rect>
+                            <path class="carro-svg" d="M 467 35 Q 472.5 42 478 35"></path>
+                            <circle class="carro-svg" cx="485" cy="36" r="2" fill="rgb(255, 199, 199)"></circle>
+                            <circle class="carro-svg" cx="460" cy="36" r="2" fill="rgb(255, 199, 199)"></circle>
+                            <circle class="carro-svg" cx="480" cy="30" r="1" fill="rgb(213, 174, 125)" style="color: rgb(98, 47, 14);"></circle>
+                            <circle class="carro-svg" cx="465" cy="30" r="1" fill="rgb(213, 174, 125)" style="color: rgb(98, 47, 14);"></circle>
+                        </svg>
+                    </button>
+
+                    <div class="init_button btn-group d-flex align-items-center">
+                        <a href="PeluPages/Principales/PeluIniciar.html" class="btn btn-cafe-claro fs-5" target="_blank">Iniciar Sesión</a>
+                        <a href="PeluPages/Principales/PeluCrearCuenta.html" class="btn btn-cafe-claro fs-5">Crear Cuenta</a>
+                    </div>
+                </div>
+            </div>
+            
+            <ul class="nav nav-justified rounded-5 shadow p-2 small" id="menuNav" style="background-color: #D7C4B7;"> 
+                <li class="nav-item"><a class="nav-link fs-6 fw-semibold text-uppercase text-pastel-cafe" href="../../index.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link active bg-white text-dark rounded-5 fs-6 fw-semibold text-uppercase text-pastel-cafe" href="PeluDuctos.html">Productos</a></li>
+                <li class="nav-item"><a class="nav-link fs-6 fw-semibold text-uppercase text-pastel-cafe" target="_blank" href="PeluHistorial.html">Historial</a></li>
+                <li class="nav-item"><a class="nav-link fs-6 fw-semibold text-uppercase text-pastel-cafe" target="_blank" href="PeluSucursales.html">Sucursales</a></li>
+            </ul>
+        </div>
+
+        <!-- PANEL EXCLUSIVO PARA ADMINISTRADOR -->
+        <div id="panelAdminAgregar" class="container my-4 d-none">
+            <div class="card p-4 border-0 shadow-sm" style="background-color: #ffe2c7;">
+                <h4 class="text-pastel-cafe fw-bold mb-3">🛠️ Panel Admin: Agregar Nuevo Producto</h4>
+                <form id="formAgregarProducto" onsubmit="guardarNuevoProducto(event)" class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">Nombre del Producto</label>
+                        <input type="text" id="adminNombre" class="form-control" placeholder="Ej: Pikachu Gigante" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label fw-bold">Categoría</label>
+                        <select id="adminCategoria" class="form-select" required>
+                            <option value="Anime">Anime</option>
+                            <option value="Pokemon">Pokemon</option>
+                            <option value="Sonic">Sonic</option>
+                            <option value="Snoopys">Snoopys</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label fw-bold">Precio ($)</label>
+                        <input type="number" id="adminPrecio" class="form-control" placeholder="25000" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label fw-bold">Ruta Imagen (Opcional)</label>
+                        <input type="text" id="adminImagen" class="form-control" placeholder="../../PeluAssets/Peluches/eevee.png">
+                    </div>
+                    <div class="col-12 text-end">
+                        <button type="submit" class="btn btn-success fw-bold">➕ Guardar Producto</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- CONTENEDOR DINÁMICO DE PRODUCTOS POR CATEGORÍA -->
+        <div class="container my-5" id="contenedorCatalogo">
+            <!-- Se llena dinámicamente con JS -->
+        </div>
+
+        <footer class="text-center pb-3 border-top pt-4">
+            <p class="text-pastel-cafe fw-semibold m-0">Grupo 8 de Jóvenes Vendedores</p>
+            <p class="text-muted small m-0">&copy; 2026 Lo Quieres, Te lo Vendo. Todos los Derechos Reservados</p>
+        </footer>
+
+        <script>
+            // Base de datos de productos iniciales
+            const productosSemilla = [
+                { id: 1, categoria: "Anime", nombre: "Jujutsu kaisen - Yuji Itadori", precio: 26500, imagen: "../../PeluAssets/Peluches/Yuji Itadori.png", detalle: "detalle_itadori.html" },
+                { id: 2, categoria: "Anime", nombre: "Jujutsu kaisen - Gojo Satoru", precio: 28000, imagen: "../../PeluAssets/Peluches/Gojo Satoru.png", detalle: "detalle_gojo.html" },
+                { id: 3, categoria: "Pokemon", nombre: "Eevee", precio: 29000, imagen: "../../PeluAssets/Peluches/eevee.png", detalle: "detalle_eevee.html" },
+                { id: 4, categoria: "Pokemon", nombre: "Snorlax", precio: 23000, imagen: "../../PeluAssets/Peluches/snorlax.png", detalle: "detalle_snorlax.html" },
+                { id: 5, categoria: "Sonic", nombre: "Sonic Pequeño", precio: 10000, imagen: "../../PeluAssets/Peluches/sonic pequeño.png", detalle: "detalle_sonic.html" },
+                { id: 6, categoria: "Sonic", nombre: "Shadow Batman", precio: 15000, imagen: "../../PeluAssets/Peluches/shadow Batman.png", detalle: "detalle_shadow.html" },
+                { id: 7, categoria: "Snoopys", nombre: "Snoopy Rosa", precio: 25000, imagen: "../../PeluAssets/Peluches/snoopy rosa.png", detalle: "detalle_snoopy_rosa.html" },
+                { id: 8, categoria: "Snoopys", nombre: "Snoopy el Piloto-Mecánico", precio: 29000, imagen: "../../PeluAssets/Peluches/snoopy mecanico.png", detalle: "detalle_snoopy_piloto.html" }
+            ];
+
+            function obtenerProductos() {
+                let prods = JSON.parse(localStorage.getItem('productosDB'));
+                if (!prods || prods.length === 0) {
+                    localStorage.setItem('productosDB', JSON.stringify(productosSemilla));
+                    return productosSemilla;
+                }
+                return prods;
+            }
+
+            function esAdmin() {
+                const usuarioActivo = JSON.parse(localStorage.getItem('usuarioLogueado'));
+                return usuarioActivo && (usuarioActivo.rol === "admin" || usuarioActivo.nombre === "Jadeicent" || usuarioActivo.nombre === "shadow");
+            }
+
+            function renderizarCatalogo() {
+                const productos = obtenerProductos();
+                const contenedor = document.getElementById('contenedorCatalogo');
+                const esUsuarioAdmin = esAdmin();
+
+                // Mostrar u ocultar panel de agregar según el rol
+                const panelAdmin = document.getElementById('panelAdminAgregar');
+                if (esUsuarioAdmin) {
+                    panelAdmin.classList.remove('d-none');
+                } else {
+                    panelAdmin.classList.add('d-none');
+                }
+
+                const categorias = ["Anime", "Pokemon", "Sonic", "Snoopys"];
+                let html = "";
+
+                categorias.forEach(cat => {
+                    const prodsCat = productos.filter(p => p.categoria === cat);
+                    if (prodsCat.length > 0) {
+                        html += `<h2 class="text-pastel-cafe fw-bold mb-4 border-bottom pb-2">${cat}</h2>`;
+                        html += `<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mb-5">`;
+
+                        prodsCat.forEach(prod => {
+                            const imagenRuta = prod.imagen || '../../PeluAssets/Iconos/Logo.png';
+                            html += `
+                                <div class="col">
+                                    <div class="card h-100 shadow-sm border-0 producto-card">
+                                        <img src="${imagenRuta}" class="card-img-top p-3" alt="${prod.nombre}" style="height: 220px; object-fit: contain;" onerror="this.src='../../PeluAssets/Iconos/Logo.png'">
+                                        <div class="card-body d-flex flex-column text-center">
+                                            <h6 class="card-title text-pastel-cafe fw-bold">${prod.nombre}</h6>
+                                            <p class="card-text text-success fw-bold fs-5 mt-auto">$${Number(prod.precio).toLocaleString('es-CL')}</p>
+                                            <div class="d-flex justify-content-between gap-2 mt-2">
+                                                <a href="${prod.detalle || '#'}" class="btn btn-sm btn-info-prod w-50">Ver info</a>
+                                                <button class="btn btn-sm btn-add-cart w-50" onclick="agregarAlCarro('${prod.nombre}', ${prod.precio}, '${imagenRuta}')">Al Carro</button>
+                                            </div>
+                                            ${esUsuarioAdmin ? `
+                                                <button class="btn btn-danger btn-sm mt-2 w-100 fw-bold" onclick="eliminarProductoAdmin(${prod.id})">
+                                                    🗑️ Eliminar (Admin)
+                                                </button>
+                                            ` : ''}
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        html += `</div>`;
+                    }
+                });
+
+                contenedor.innerHTML = html;
+            }
+
+            // Función para agregar productos nuevos (Solo Admin)
+            function guardarNuevoProducto(event) {
+                event.preventDefault();
+                const nombre = document.getElementById('adminNombre').value.trim();
+                const categoria = document.getElementById('adminCategoria').value;
+                const precio = Number(document.getElementById('adminPrecio').value);
+                let imagen = document.getElementById('adminImagen').value.trim();
+
+                if (!imagen) imagen = "../../PeluAssets/Iconos/Logo.png";
+
+                const productos = obtenerProductos();
+                const nuevoProd = {
+                    id: Date.now(),
+                    categoria,
+                    nombre,
+                    precio,
+                    imagen,
+                    detalle: "#"
+                };
+
+                productos.push(nuevoProd);
+                localStorage.setItem('productosDB', JSON.stringify(productos));
+                alert(`¡Producto "${nombre}" agregado con éxito!`);
+                document.getElementById('formAgregarProducto').reset();
+                renderizarCatalogo();
+            }
+
+            // Función para eliminar productos (Solo Admin)
+            function eliminarProductoAdmin(id) {
+                if (confirm("¿Estás seguro de que deseas eliminar este producto del catálogo?")) {
+                    let productos = obtenerProductos();
+                    productos = productos.filter(p => p.id !== id);
+                    localStorage.setItem('productosDB', JSON.stringify(productos));
+                    renderizarCatalogo();
+                }
+            }
+
+            // Función original intacta para agregar al carro por usuario
+            function agregarAlCarro(nombre, precio, rutaImagen) {
+                const usuarioActivo = JSON.parse(localStorage.getItem('usuarioLogueado'));
+                
+                if (!usuarioActivo) {
+                    alert('Debes iniciar sesión para agregar productos al carro.');
+                    window.location.href = 'PeluIniciar.html';
+                    return;
+                }
+
+                const claveCarrito = `carritoPeluches_${usuarioActivo.correo}`;
+                const carrito = JSON.parse(localStorage.getItem(claveCarrito)) || [];
+                
+                const index = carrito.findIndex(prod => prod.nombre === nombre);
+                if (index !== -1) {
+                    carrito[index].cantidad = (carrito[index].cantidad || 1) + 1;
+                } else {
+                    carrito.push({ nombre: nombre, precio: precio, imagen: rutaImagen, cantidad: 1, seleccionado: true });
+                }
+                
+                localStorage.setItem(claveCarrito, JSON.stringify(carrito));
+                alert(`¡Se añadió "${nombre}" al Carro Exitosamente!`);
+            }
+
+            document.addEventListener('DOMContentLoaded', renderizarCatalogo);
+        </script>
+
+    </body>
+</html>
