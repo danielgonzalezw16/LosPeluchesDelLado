@@ -100,9 +100,72 @@ body{
 /* --------------------------- */
 /* - Fin SubSección Busqueda - */
 /* --------------------------- */
+
+/*-------------------------------------*/
+/*    AREA Formulario del usuario*/
+/*-------------------------------------*/
+
+
+.formulario{
+  border: 4px solid rgba(0, 0, 0, 0.18);
+  width: 90%;
+  padding: 30px 40px;
+  border-radius: 10px;
+  backdrop-filter: blur(10px) ;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #f2b3b352;
+}
+.input-box{
+  display: flex;
+  align-items: center;
+  height:  60px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 40px;
+  padding: 20px;
+  
+}
+.input-box input{
+ background-color: transparent;
+ border: 0;
+ outline: 0;
+ min-width: 0;
+ font-size: 16px;
+ flex: 1;
+}
+.input-box input::placeholder{
+  color:#fff;
+}
+.input-box:has(.form-control.is-invalid) + .invalid-feedback {
+  display: block;
+}
+
+.formulario .form-control {
+  background-color: transparent;
+}
+
+.formulario .form-control:focus {
+  background-color: transparent;
+  box-shadow: none; /* quita el resplandor azul que Bootstrap agrega al enfocar */
+  color: #fff; /* para que el texto que escribas se siga viendo sobre el fondo oscuro */
+}
+/*-------------------------------------*/
+/*     FIN AREA Formulario del usuario */
+/*-------------------------------------*/
+
 .carro-svg{
   cursor: pointer;
   pointer-events: visiblePainted;
+}
+
+.carrito{
+  margin-top:8px;
+  transition: transform 0.2s 
+}
+
+.carrito:hover {
+  transform: scale(1.15)
 }
 
 .fondo-circulo { 
@@ -120,15 +183,83 @@ body{
 
 .campana-linea { 
     fill: none;
-    stroke: #ffffff;    /* Color del trazo de la campana (Blanco) */
-    stroke-width: 24;   /* Grosor de la línea de la campana */
+    stroke: #4e3629;    /* Color del trazo de la campana (Blanco) */
+    stroke-width: 24;      /* Grosor Linea */
     stroke-linecap: round;
     stroke-linejoin: round;
 }
 
 .campana-badajo {
-    fill: #ffffff;      /* Color de la barrita inferior (Blanco) */
+    fill: #4e3629;    
 }
+
+/* --- Efecto para el Fondo Circular --- */
+
+.campana .fondo-circulo {
+    opacity: 0; 
+    transition: opacity 0.3s ease; 
+}
+
+/* Solidificación */
+.campana:hover .fondo-circulo {
+    opacity: 1; 
+}
+
+/* --- Efecto de Agrandado para la Campana Completa --- */
+.campana {
+    transition: transform 0.2s ease-in-out; 
+}
+
+.campana:hover {
+    transform: scale(1.15); 
+}
+
+.campana:hover .campana-linea{
+  stroke: #ffffff;
+}
+
+.campana:hover .campana-badajo{
+  fill: #ffffff;
+}
+
+.num-notis{
+    position: absolute;
+    top: 7px;                  
+    right: 11px;                
+    background-color: #ffffff; 
+    color: #4e3629;       
+    font-size: 11px;  
+    font-weight: bold;
+    font-family: sans-serif;
+    
+    /* Forzar Círculo */
+    min-width: 18px;
+    height: 18px;
+    border-radius: 50px;    
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Espacio por si es mas de 9*/
+    padding: 0 4px; 
+    box-sizing: border-box;
+
+    z-index: 10;
+    transition: transform 0.2s ease;
+}
+
+.campana:hover .num-notis{
+    transform:translate(6px, -2px);
+}
+
+.init_button {
+  font-family:'Candy Cake',sans-serif;
+  letter-spacing: 2px;
+  margin-left: -10px !important;
+  margin-right: 15px
+}
+
 /* SubSección: Botones */
 /* ------------------- */
 
@@ -319,6 +450,12 @@ button.pelu-arrow{
   font-style: normal;
 }
 
+@font-face {
+    font-family: 'Candy Cake';
+    src: url('PeluAssets/Tipografias/CandyCake.ttf') format('opentype');
+    font-weight: 100 900;
+    font-style: normal;
+}
 
 /*--------------------------*/
 /*     FIN AREA FUENTES     */
@@ -331,4 +468,14 @@ footer{
   padding: 15px;
   font-family: Arial, sans-serif;
   font-size: 12px;
+}
+/*     titulos     */
+
+.titulo {
+    text-align: center;
+    padding: 40px 0;   /* espacio arriba y abajo */
+}
+.titulo h1 {
+    color: white;
+    margin: 0;
 }
