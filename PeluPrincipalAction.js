@@ -83,7 +83,12 @@ function cargarUsuariosPredefinidos() {
       nombre: "Pepe",
       correo: "pepe.aguilarc@gmail.com",
       contrasena: "pepito15",
-      rol: "user"
+      rol: "vendedor"
+    },{
+      nombre: "Juja",
+      correo: "juja.juja@juja.ju",
+      contrasena: "jujaneitor",
+      rol: "vendedor"
     },{
       nombre: "Jadeicent",
       correo: "pastelss@plushe.cl",
