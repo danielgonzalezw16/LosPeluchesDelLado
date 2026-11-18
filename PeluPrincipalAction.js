@@ -257,6 +257,15 @@ document.addEventListener("DOMContentLoaded", () => {
     contenedorBotones.innerHTML = `
       <a href="${rutaPerfil}" class="btn btn-cafe-claro fs-5">${textoBoton}</a>
     `;
+    
+    const textoBotonV = usuarioActivo.rol === "vendedor" 
+      ? `${usuarioActivo.nombre.split(' ')[0]} | Vendedor |` 
+      : `Hola, ${usuarioActivo.nombre.split(' ')[0]}`;
+
+    contenedorBotonesV.innerHTML = `
+      <a href="${rutaPerfil}" class="btn btn-cafe-claro fs-5">${textoBotonV}</a>
+    `;
+  }
   }
 });
 
@@ -268,7 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const usuarioActivo = JSON.parse(localStorage.getItem("usuarioLogueado"));
   const contenedorBotones = document.querySelector(".init_button");
 
-  // 1. Modificar el menú superior si hay sesión y existe el contenedor
+  // Modificar menú superior si hay sesión y existe el contenedor
   if (usuarioActivo && contenedorBotones) {
     const esPaginaPrincipal = window.location.pathname.endsWith("index.html") || window.location.pathname === "/" || window.location.pathname === "";
     
@@ -279,6 +288,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const esAdmin = usuarioActivo.rol === "admin" || usuarioActivo.nombre === "Jadeicent" || usuarioActivo.nombre === "shadow";
     const nombreCorto = usuarioActivo.nombre ? usuarioActivo.nombre.split(' ')[0] : "Admin";
     const textoBoton = esAdmin ? `${nombreCorto} | Admin |` : `Hola, ${nombreCorto}`;
+
+    const esVendi = usuarioActivo.rol === "vendedor" || usuarioActivo.nombre === "Pepe" || usuarioActivo.nombre === "Juja";
+    const nombreCortoV = usuarioActivo.nombre ? usuarioActivo.nombre.split(' ')[0] : "Vendedor";
+    const textoBotonV = esVendi ? `${nombreCortoV} | Vendedor |` : `Hola, ${nombreCortoV}`;
 
     if (esAdmin) {
       contenedorBotones.innerHTML = `
@@ -292,7 +305,50 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // 2. Inyectar el botón flotante de pruebas si el usuario actual es Administrador
+  if (usuarioActivo && (usuarioActivo.rol === "vendedor" || usuarioActivo.nombre === "Pepe" || usuarioActivo.nombre === "Juja")) {
+    if (!document.getElementById("btn-lista-productos")) {
+      const botonFlotante = document.createElement("div");
+      botonFlotante.innerHTML = `
+        <button id="btn-lista-productos" style="
+          position: fixed; 
+          bottom: 20px; 
+          right: 20px; 
+          background-color: #4e3629; 
+          color: #ffe2c7; 
+          border: 2px solid #ffe2c7; 
+          padding: 12px 18px; 
+          border-radius: 30px; 
+          font-weight: bold; 
+          cursor: pointer; 
+          z-index: 99999;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+          transition: all 0.3s ease;
+        ">📚 Lista de Productos</button>
+      `;
+
+      document.body.appendChild(botonFlotante);
+
+      const btnProductos = document.getElementById("btn-lista-productos");
+
+      btnProductos.addEventListener("click", () => {
+
+        // ⏳ EFECTO DE CARGA DE 2 SEGUNDOS
+        btnProductos.innerHTML = "⏳ Accediendo a Todos los Productos...";
+        btnProductos.style.opacity = "0.8";
+        btnProductos.disabled = true;
+
+        setTimeout(() => {
+          btnProductos.innerHTML = "📚 Lista de Productos";
+          btnProductos.style.opacity = "1";
+          btnProductos.disabled = false;
+        });
+
+      });
+    }
+  }
+
+
+  // Botón Flotante de Pruebas
   if (usuarioActivo && (usuarioActivo.rol === "admin" || usuarioActivo.nombre === "Jadeicent" || usuarioActivo.nombre === "shadow")) {
     if (!document.getElementById("btn-panel-pruebas")) {
       const botonFlotante = document.createElement("div");
