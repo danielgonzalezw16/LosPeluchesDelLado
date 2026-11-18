@@ -288,23 +288,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const enSubCarpeta = window.location.pathname.includes("/PeluPages/");
     const rutaPerfil = enSubCarpeta ? "Principales/PeluUsuario.html" : "PeluPages/Principales/PeluUsuario.html";
     const rutaRegistro = enSubCarpeta ? "Principales/PeluCrearCuenta.html" : "PeluPages/Principales/PeluCrearCuenta.html";
-
+    
     const esAdmin = usuarioActivo.rol === "admin" || usuarioActivo.nombre === "Jadeicent" || usuarioActivo.nombre === "shadow";
-    const nombreCorto = usuarioActivo.nombre ? usuarioActivo.nombre.split(' ')[0] : "Admin";
-    const textoBoton = esAdmin ? `${nombreCorto} | Admin |` : `Hola, ${nombreCorto}`;
-
-    const esVendi = usuarioActivo.rol === "vendedor" || usuarioActivo.nombre === "Pepe" || usuarioActivo.nombre === "Juja";
-    const nombreCortoV = usuarioActivo.nombre ? usuarioActivo.nombre.split(' ')[0] : "Vendedor";
-    const textoBotonV = esVendi ? `${nombreCortoV} | Vendedor |` : `Hola, ${nombreCortoV}`;
+    const esVendedor = usuarioActivo.rol === "vendedor" || usuarioActivo.nombre === "Pepe" || usuarioActivo.nombre === "Juja";
+    const nombreCorto = usuarioActivo.nombre ? usuarioActivo.nombre.split(' ')[0] : "Usuario";
 
     if (esAdmin) {
       contenedorBotones.innerHTML = `
-        <a href="${rutaPerfil}" class="btn btn-cafe-claro fs-5 me-2">${textoBoton}</a>
+        <a href="${rutaPerfil}" class="btn btn-cafe-claro fs-5 me-2">${nombreCorto} | Admin |</a>
         <a href="${rutaRegistro}" class="btn btn-warning fs-5 text-dark fw-bold" target="_blank">Admin Registro</a>
+      `;
+    } else if (esVendedor) {
+      contenedorBotones.innerHTML = `
+        <a href="${rutaPerfil}" class="btn btn-cafe-claro fs-5">${nombreCorto} | Vendedor |</a>
       `;
     } else {
       contenedorBotones.innerHTML = `
-        <a href="${rutaPerfil}" class="btn btn-cafe-claro fs-5">${textoBoton}</a>
+        <a href="${rutaPerfil}" class="btn btn-cafe-claro fs-5">Hola, ${nombreCorto}</a>
       `;
     }
   }
@@ -345,7 +345,7 @@ document.addEventListener("DOMContentLoaded", () => {
           btnProductos.innerHTML = "📚 Lista de Productos";
           btnProductos.style.opacity = "1";
           btnProductos.disabled = false;
-        });
+        },2000);
 
       });
     }
