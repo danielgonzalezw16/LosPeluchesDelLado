@@ -271,7 +271,6 @@ document.addEventListener("DOMContentLoaded", () => {
       <a href="${rutaPerfil}" class="btn btn-cafe-claro fs-5">${textoBotonV}</a>
     `;
   }
-  }
 });
 
 // ==========================================
