@@ -105,14 +105,14 @@ async function iniciarOrdenes() {
     return;
   }
 
-  if (typeof ORDENES === "undefined" || typeof PRODUCTOS === "undefined") {
+  if (typeof obtenerOrdenes !== "function" || typeof PRODUCTOS === "undefined") {
     mostrarError("No se cargó datos.js (revisa la ruta del <script> en el HTML).");
     return;
   }
-  const ordenes = ORDENES;
+  const ordenes = obtenerOrdenes();
   const productos = PRODUCTOS;
 
-  const nombreProducto = id => (productos.find(p => p.id === id) || {}).nombre || "Producto #" + id;
+  const nombreProducto = item => item.nombre || (productos.find(p => p.id === item.productoId) || {}).nombre || "Producto #" + (item.productoId || "");
   const totalOrden = o => o.items.reduce((s, i) => s + i.cantidad * i.precio, 0);
   const colorEstado = { "Pendiente": "warning", "En preparación": "info", "Entregada": "success" };
 
@@ -153,7 +153,7 @@ async function iniciarOrdenes() {
         <tbody>
           ${o.items.map(i => `
             <tr>
-              <td>${esc(nombreProducto(i.productoId))}</td>
+              <td>${esc(nombreProducto(i))}</td>
               <td>${i.cantidad}</td>
               <td>${clp(i.precio)}</td>
               <td>${clp(i.cantidad * i.precio)}</td>
