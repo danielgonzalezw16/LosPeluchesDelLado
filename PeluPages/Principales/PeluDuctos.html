@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="../../PeluPrincipalDesign.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+        <script src="../../PeluJavas/datos.js"></script>
         <script src="../../PeluJavas/PeluBusquedaGeneral.js" defer></script>
         <script src="../../PeluPrincipalAction.js" defer></script>
         <title>Product Plushes</title>
@@ -25,6 +26,8 @@
             .btn-info-prod:hover { background-color: #c4ae9d; color: #4e3629; }
             .btn-add-cart { background-color: #4e3629; color: white; font-weight: 600; }
             .btn-add-cart:hover { background-color: #3b281f; color: white; }
+            .admin-tab-btn { background-color: #f4ece6; color: #4e3629; border: 1px solid #D7C4B7; font-weight: 600; }
+            .admin-tab-btn.active { background-color: #4e3629 !important; color: #ffe2c7 !important; border-color: #4e3629 !important; }
         </style>
 
         <div class="menu w-100 d-flex flex-column gap-1">
@@ -51,7 +54,7 @@
                     <button type="button" 
                             class="campana border-0 bg-transparent position-relative p-1 text-pastel-cafe align-items-row" 
                             style="pointer-events:auto;" 
-                            onclick="window.open('PeluPages/Principales/PeluNotificaciones.html', '_blank')" aria-label="Campana">
+                            aria-label="Campana">
                         <svg xmlns="http://w3.org" viewBox="2000 0 500 500" width="52" height="52">
                             <g transform="translate(2000, 0)">
                                 <circle class="fondo-circulo" cx="250" cy="250" r="210" />
@@ -60,11 +63,11 @@
                                 <rect class="campana-badajo" x="210" y="365" width="80" height="24" rx="16" />
                             </g>
                         </svg>
-                        <span class="num-notis badge-notificacion">3</span>
+                        <span class="num-notis badge-notificacion">2</span>
                     </button>
 
                     <button type="button" class="carrito d-flex p-0 border-0 bg-transparent text-pastel-cafe" 
-                            style="pointer-events:none;" onclick="window.open('PeluVentas.html', '_blank')" aria-label="Carro">
+                            style="pointer-events:auto; cursor:pointer;" onclick="window.open('PeluVentas.html', '_blank')" aria-label="Carro">
                         <svg xmlns="http://www.w3.org/2000/svg" width="75" height="41" viewBox="460 0 50 45" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <polygon class="carro-svg" points="450,18 495,18 489,43 456,43" fill="transparent"></polygon>
                             <line class="carro-svg" x1="460" y1="10" x2="485" y2="10"></line>
@@ -82,8 +85,8 @@
                     </button>
 
                     <div class="init_button btn-group d-flex align-items-center">
-                        <a href="PeluPages/Principales/PeluIniciar.html" class="btn btn-cafe-claro fs-5" target="_blank">Iniciar Sesión</a>
-                        <a href="PeluPages/Principales/PeluCrearCuenta.html" class="btn btn-cafe-claro fs-5">Crear Cuenta</a>
+                        <a href="PeluIniciar.html" class="btn btn-cafe-claro fs-5" target="_blank">Iniciar Sesión</a>
+                        <a href="PeluCrearCuenta.html" class="btn btn-cafe-claro fs-5">Crear Cuenta</a>
                     </div>
                 </div>
             </div>
@@ -96,36 +99,121 @@
             </ul>
         </div>
 
-        <!-- PANEL EXCLUSIVO PARA ADMINISTRADOR -->
+        <!-- PANEL EXCLUSIVO PARA ADMINISTRADOR CON APARTADOS -->
         <div id="panelAdminAgregar" class="container my-4 d-none">
-            <div class="card p-4 border-0 shadow-sm" style="background-color: #ffe2c7;">
-                <h4 class="text-pastel-cafe fw-bold mb-3">🛠️ Panel Admin: Agregar Nuevo Producto</h4>
-                <form id="formAgregarProducto" onsubmit="guardarNuevoProducto(event)" class="row g-3">
-                    <div class="col-md-4">
-                        <label class="form-label fw-bold">Nombre del Producto</label>
-                        <input type="text" id="adminNombre" class="form-control" placeholder="Ej: Pikachu Gigante" required>
+            <div class="card p-4 border-0 shadow-sm rounded-4" style="background-color: #ffe2c7;">
+                <div class="d-flex flex-wrap justify-content-between align-items-center border-bottom pb-3 mb-3 gap-2">
+                    <h4 class="text-pastel-cafe fw-bold m-0">🛠️ Panel de Administración de Catálogo</h4>
+                    <div class="btn-group flex-wrap" role="group">
+                        <button type="button" class="btn btn-sm admin-tab-btn active" onclick="cambiarApartadoAdmin('tabAgregar', this)">➕ Agregar Producto</button>
+                        <button type="button" class="btn btn-sm admin-tab-btn" onclick="cambiarApartadoAdmin('tabStockPrecios', this)">📦 Stock y Precios</button>
+                        <button type="button" class="btn btn-sm admin-tab-btn" onclick="cambiarApartadoAdmin('tabCategorias', this)">🏷️ Nueva Categoría</button>
+                        <button type="button" class="btn btn-sm admin-tab-btn" onclick="cambiarApartadoAdmin('tabPapelera', this)">♻️ Eliminados / Agotados</button>
                     </div>
-                    <div class="col-md-3">
-                        <label class="form-label fw-bold">Categoría</label>
-                        <select id="adminCategoria" class="form-select" required>
-                            <option value="Anime">Anime</option>
-                            <option value="Pokemon">Pokemon</option>
-                            <option value="Sonic">Sonic</option>
-                            <option value="Snoopys">Snoopys</option>
-                        </select>
+                </div>
+
+                <!-- APARTADO 1: AGREGAR NUEVO PRODUCTO -->
+                <div id="tabAgregar" class="admin-apartado">
+                    <h6 class="text-pastel-cafe fw-bold mb-3">Registrar nuevo peluche en el catálogo</h6>
+                    <form id="formAgregarProducto" onsubmit="guardarNuevoProducto(event)" class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold text-pastel-cafe">Nombre del Producto</label>
+                            <input type="text" id="adminNombre" class="form-control" placeholder="Ej: Pikachu Gigante" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label fw-bold text-pastel-cafe">Categoría</label>
+                            <select id="adminCategoria" class="form-select" required>
+                                <!-- Se llena dinámicamente con las categorías disponibles -->
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label fw-bold text-pastel-cafe">Precio c/IVA ($)</label>
+                            <input type="number" id="adminPrecio" class="form-control" min="1" placeholder="25000" required>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label fw-bold text-pastel-cafe">Stock (0 - 50)</label>
+                            <input type="number" id="adminStock" class="form-control" min="0" max="50" value="15" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-pastel-cafe">Descripción del Producto</label>
+                            <input type="text" id="adminDescripcion" class="form-control" placeholder="Ej: Peluche suave de 30 cm, edición especial" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label fw-bold text-pastel-cafe">Subir Imagen (Archivo)</label>
+                            <input type="file" id="adminImagenArchivo" class="form-control" accept="image/*">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label fw-bold text-pastel-cafe">O Ruta Imagen (Opcional)</label>
+                            <input type="text" id="adminImagen" class="form-control" placeholder="../../PeluAssets/Peluches/eevee.png">
+                        </div>
+                        <div class="col-12 text-end">
+                            <button type="submit" class="btn text-white fw-bold px-4" style="background-color: #4e3629;">➕ Guardar Producto</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- APARTADO 2: MODIFICAR STOCK (0-50), PRECIO Y QUITAR PRODUCTOS -->
+                <div id="tabStockPrecios" class="admin-apartado d-none">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h6 class="text-pastel-cafe fw-bold m-0">Control de Stock (Límite 0 a 50) y Precios Activos</h6>
+                        <input type="text" id="buscadorAdminTabla" class="form-control form-control-sm w-auto" placeholder="Filtrar producto..." oninput="renderizarTablaAdmin()">
                     </div>
-                    <div class="col-md-2">
-                        <label class="form-label fw-bold">Precio c/IVA ($)</label>
-                        <input type="number" id="adminPrecio" class="form-control" placeholder="25000" required>
+                    <div class="table-responsive bg-white rounded-3 shadow-sm p-2">
+                        <table class="table table-sm table-hover align-middle mb-0">
+                            <thead>
+                                <tr class="text-pastel-cafe">
+                                    <th>Producto</th>
+                                    <th>Categoría</th>
+                                    <th style="width: 170px;">Precio c/IVA ($)</th>
+                                    <th style="width: 190px;">Stock (0 - 50)</th>
+                                    <th class="text-end">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaAdminStockBody"></tbody>
+                        </table>
                     </div>
-                    <div class="col-md-3">
-                        <label class="form-label fw-bold">Ruta Imagen (Opcional)</label>
-                        <input type="text" id="adminImagen" class="form-control" placeholder="../../PeluAssets/Peluches/eevee.png">
+                </div>
+
+                <!-- APARTADO 3: AGREGAR NUEVA CATEGORÍA CON IMAGEN -->
+                <div id="tabCategorias" class="admin-apartado d-none">
+                    <h6 class="text-pastel-cafe fw-bold mb-3">Crear nueva categoría con imagen</h6>
+                    <form id="formNuevaCategoria" onsubmit="guardarNuevaCategoria(event)" class="row g-3 align-items-end">
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold text-pastel-cafe">Nombre de la Categoría</label>
+                            <input type="text" id="catNombre" class="form-control" placeholder="Ej: Sanrio" required>
+                        </div>
+                        <div class="col-md-5">
+                            <label class="form-label fw-bold text-pastel-cafe">Subir Imagen de Categoría</label>
+                            <input type="file" id="catImagenArchivo" class="form-control" accept="image/*" required>
+                        </div>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn text-white fw-bold w-100" style="background-color: #4e3629;">🏷️ Crear Categoría</button>
+                        </div>
+                    </form>
+                    <div class="mt-4">
+                        <small class="fw-bold text-pastel-cafe d-block mb-2">Categorías registradas actualmente:</small>
+                        <div id="listaCategoriasAdmin" class="d-flex flex-wrap gap-2"></div>
                     </div>
-                    <div class="col-12 text-end">
-                        <button type="submit" class="btn btn-success fw-bold">➕ Guardar Producto</button>
+                </div>
+
+                <!-- APARTADO 4: PRODUCTOS ELIMINADOS Y/O AGOTADOS -->
+                <div id="tabPapelera" class="admin-apartado d-none">
+                    <h6 class="text-pastel-cafe fw-bold mb-3">Productos Eliminados o Agotados (Stock 0) — Restaurar al Catálogo</h6>
+                    <div class="table-responsive bg-white rounded-3 shadow-sm p-2">
+                        <table class="table table-sm table-hover align-middle mb-0">
+                            <thead>
+                                <tr class="text-pastel-cafe">
+                                    <th>Producto</th>
+                                    <th>Categoría</th>
+                                    <th>Precio</th>
+                                    <th>Estado</th>
+                                    <th class="text-end">Reincorporar</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaAdminInactivosBody"></tbody>
+                        </table>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
 
@@ -140,50 +228,261 @@
         </footer>
 
         <script>
-            const productosSemilla = [
-                { id: 1, categoria: "Anime", nombre: "Jujutsu kaisen - Yuji Itadori", precio: 26500, imagen: "../../PeluAssets/Peluches/Yuji Itadori.png", detalle: "detalle_itadori.html" },
-                { id: 2, categoria: "Anime", nombre: "Jujutsu kaisen - Gojo Satoru", precio: 28000, imagen: "../../PeluAssets/Peluches/Gojo Satoru.png", detalle: "detalle_gojo.html" },
-                { id: 3, categoria: "Pokemon", nombre: "Eevee", precio: 29000, imagen: "../../PeluAssets/Peluches/eevee.png", detalle: "detalle_eevee.html" },
-                { id: 4, categoria: "Pokemon", nombre: "Snorlax", precio: 23000, imagen: "../../PeluAssets/Peluches/snorlax.png", detalle: "detalle_snorlax.html" },
-                { id: 5, categoria: "Sonic", nombre: "Sonic Pequeño", precio: 10000, imagen: "../../PeluAssets/Peluches/sonic pequeño.png", detalle: "detalle_sonic.html" },
-                { id: 6, categoria: "Sonic", nombre: "Shadow Batman", precio: 15000, imagen: "../../PeluAssets/Peluches/shadow Batman.png", detalle: "detalle_shadow.html" },
-                { id: 7, categoria: "Snoopys", nombre: "Snoopy Rosa", precio: 25000, imagen: "../../PeluAssets/Peluches/snoopy rosa.png", detalle: "detalle_snoopy_rosa.html" },
-                { id: 8, categoria: "Snoopys", nombre: "Snoopy el Piloto-Mecánico", precio: 29000, imagen: "../../PeluAssets/Peluches/snoopy mecanico.png", detalle: "detalle_snoopy_piloto.html" }
-            ];
-
-            function obtenerProductos() {
-                let prods = JSON.parse(localStorage.getItem('productosDB'));
-                if (!prods || prods.length === 0) {
-                    localStorage.setItem('productosDB', JSON.stringify(productosSemilla));
-                    return productosSemilla;
-                }
-                return prods;
-            }
-
             function esAdmin() {
                 const usuarioActivo = JSON.parse(localStorage.getItem('usuarioLogueado'));
                 return usuarioActivo && (usuarioActivo.rol === "admin" || usuarioActivo.nombre === "Jadeicent" || usuarioActivo.nombre === "shadow");
             }
 
+            // Leer imagen subida como Base64
+            function leerArchivoComoBase64(inputElement) {
+                return new Promise((resolve) => {
+                    const archivo = inputElement && inputElement.files && inputElement.files[0];
+                    if (!archivo) return resolve(null);
+                    const lector = new FileReader();
+                    lector.onload = (e) => resolve(e.target.result);
+                    lector.onerror = () => resolve(null);
+                    lector.readAsDataURL(archivo);
+                });
+            }
+
+            // Cambiar entre apartados del panel de administración
+            window.cambiarApartadoAdmin = function(idApartado, btn) {
+                document.querySelectorAll('.admin-apartado').forEach(el => el.classList.add('d-none'));
+                document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
+                const target = document.getElementById(idApartado);
+                if (target) target.classList.remove('d-none');
+                if (btn) btn.classList.add('active');
+                renderizarTablaAdmin();
+            };
+
+            function sincronizarSelectCategorias() {
+                const cats = obtenerCategorias();
+                const select = document.getElementById('adminCategoria');
+                const listaBadges = document.getElementById('listaCategoriasAdmin');
+                if (select) {
+                    const actual = select.value;
+                    select.innerHTML = cats.map(c => `<option value="${c.nombre}">${c.nombre}</option>`).join('');
+                    if (cats.some(c => c.nombre === actual)) select.value = actual;
+                }
+                if (listaBadges) {
+                    listaBadges.innerHTML = cats.map(c => `
+                        <span class="badge rounded-pill d-inline-flex align-items-center gap-2 px-3 py-2" style="background-color: #D7C4B7; color: #4e3629;">
+                            <img src="${c.imagen}" alt="${c.nombre}" style="width: 22px; height: 22px; object-fit: cover; border-radius: 50%;" onerror="this.src='../../PeluAssets/Iconos/Logo.png'">
+                            ${c.nombre}
+                        </span>
+                    `).join('');
+                }
+            }
+
+            // Renderizar tablas de Stock/Precios e Inactivos (Eliminados / Agotados)
+            function renderizarTablaAdmin() {
+                if (!esAdmin()) return;
+                const todos = obtenerTodosProductos();
+                const filtro = (document.getElementById('buscadorAdminTabla')?.value || '').trim().toLowerCase();
+
+                // 1) Tabla de Activos (Modificar stock 0..50, precio o eliminar)
+                const activos = todos.filter(p => !p.eliminado && (
+                    p.nombre.toLowerCase().includes(filtro) || p.categoria.toLowerCase().includes(filtro)
+                ));
+                const tbodyActivos = document.getElementById('tablaAdminStockBody');
+                if (tbodyActivos) {
+                    tbodyActivos.innerHTML = activos.length ? activos.map(p => `
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <img src="${p.imagen}" style="width: 36px; height: 36px; object-fit: contain;" onerror="this.src='../../PeluAssets/Iconos/Logo.png'">
+                                    <div>
+                                        <strong class="text-pastel-cafe d-block" style="font-size: 0.88rem;">${p.nombre}</strong>
+                                        <small class="text-muted">${p.descripcion || ''}</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="badge" style="background-color:#D7C4B7; color:#4e3629;">${p.categoria}</span></td>
+                            <td>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" class="form-control" min="0" value="${p.precio}" onchange="actualizarPrecioAdmin(${p.id}, this.value)">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center gap-1">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary fw-bold" ${p.stock <= 0 ? 'disabled' : ''} onclick="cambiarStockAdmin(${p.id}, -1)">-</button>
+                                    <input type="number" class="form-control form-control-sm text-center fw-bold" style="width: 65px;" min="0" max="50" value="${p.stock}" onchange="fijarStockAdmin(${p.id}, this.value)">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary fw-bold" ${p.stock >= 50 ? 'disabled' : ''} onclick="cambiarStockAdmin(${p.id}, 1)">+</button>
+                                    <small class="text-muted">/50</small>
+                                </div>
+                            </td>
+                            <td class="text-end">
+                                <button type="button" class="btn btn-sm btn-outline-danger" onclick="eliminarProductoAdmin(${p.id})" title="Quitar del catálogo">🗑️ Quitar</button>
+                            </td>
+                        </tr>
+                    `).join('') : `<tr><td colspan="5" class="text-center text-muted py-2">No hay productos activos que coincidan.</td></tr>`;
+                }
+
+                // 2) Tabla de Eliminados y/o Agotados
+                const inactivos = todos.filter(p => p.eliminado || Number(p.stock) <= 0);
+                const tbodyInactivos = document.getElementById('tablaAdminInactivosBody');
+                if (tbodyInactivos) {
+                    tbodyInactivos.innerHTML = inactivos.length ? inactivos.map(p => `
+                        <tr>
+                            <td>
+                                <strong class="text-pastel-cafe">${p.nombre}</strong>
+                            </td>
+                            <td>${p.categoria}</td>
+                            <td>$${Number(p.precio).toLocaleString('es-CL')}</td>
+                            <td>
+                                ${p.eliminado ? '<span class="badge bg-danger">Eliminado</span>' : ''}
+                                ${Number(p.stock) <= 0 ? '<span class="badge bg-warning text-dark">Agotado (Stock 0)</span>' : ''}
+                            </td>
+                            <td class="text-end">
+                                <button type="button" class="btn btn-sm btn-success fw-bold" onclick="restaurarProductoAdmin(${p.id})">
+                                    ♻️ Volver a colocar (Stock 10)
+                                </button>
+                            </td>
+                        </tr>
+                    `).join('') : `<tr><td colspan="5" class="text-center text-muted py-2">No hay productos eliminados ni agotados.</td></tr>`;
+                }
+            }
+
+            window.cambiarStockAdmin = function(id, delta) {
+                const todos = obtenerTodosProductos();
+                const prod = todos.find(p => p.id === id);
+                if (!prod) return;
+                const nuevo = Math.min(50, Math.max(0, Number(prod.stock) + delta));
+                prod.stock = nuevo;
+                guardarProductos(todos);
+                renderizarCatalogo();
+            };
+
+            window.fijarStockAdmin = function(id, valor) {
+                const todos = obtenerTodosProductos();
+                const prod = todos.find(p => p.id === id);
+                if (!prod) return;
+                let num = Number(valor);
+                if (isNaN(num)) num = 0;
+                prod.stock = Math.min(50, Math.max(0, Math.round(num)));
+                guardarProductos(todos);
+                renderizarCatalogo();
+            };
+
+            window.actualizarPrecioAdmin = function(id, nuevoPrecio) {
+                const todos = obtenerTodosProductos();
+                const prod = todos.find(p => p.id === id);
+                if (!prod) return;
+                const val = Math.max(0, Math.round(Number(nuevoPrecio) || 0));
+                prod.precio = val;
+                guardarProductos(todos);
+                renderizarCatalogo();
+            };
+
+            window.eliminarProductoAdmin = function(id) {
+                if (confirm("¿Quitar este producto del catálogo? Podrás volver a colocarlo desde el apartado 'Eliminados / Agotados'.")) {
+                    const todos = obtenerTodosProductos();
+                    const prod = todos.find(p => p.id === id);
+                    if (prod) prod.eliminado = true;
+                    guardarProductos(todos);
+                    renderizarCatalogo();
+                }
+            };
+
+            window.restaurarProductoAdmin = function(id) {
+                const todos = obtenerTodosProductos();
+                const prod = todos.find(p => p.id === id);
+                if (!prod) return;
+                prod.eliminado = false;
+                if (Number(prod.stock) <= 0) prod.stock = 10;
+                guardarProductos(todos);
+                renderizarCatalogo();
+            };
+
+            async function guardarNuevaCategoria(event) {
+                event.preventDefault();
+                const nombre = document.getElementById('catNombre').value.trim();
+                const inputArchivo = document.getElementById('catImagenArchivo');
+                if (!nombre) return;
+
+                const cats = obtenerCategorias();
+                if (cats.some(c => c.nombre.toLowerCase() === nombre.toLowerCase())) {
+                    alert("Esa categoría ya existe.");
+                    return;
+                }
+
+                const imgBase64 = await leerArchivoComoBase64(inputArchivo);
+                cats.push({
+                    nombre,
+                    imagen: imgBase64 || "../../PeluAssets/Iconos/Logo.png"
+                });
+                guardarCategorias(cats);
+                document.getElementById('formNuevaCategoria').reset();
+                sincronizarSelectCategorias();
+                renderizarCatalogo();
+                alert(`¡Categoría "${nombre}" creada y lista para usar!`);
+            }
+
+            async function guardarNuevoProducto(event) {
+                event.preventDefault();
+                const nombre = document.getElementById('adminNombre').value.trim();
+                const categoria = document.getElementById('adminCategoria').value;
+                const precio = Math.max(1, Number(document.getElementById('adminPrecio').value));
+                const stock = Math.min(50, Math.max(0, Number(document.getElementById('adminStock').value)));
+                const descripcion = document.getElementById('adminDescripcion').value.trim() || nombre;
+                const imgSubida = await leerArchivoComoBase64(document.getElementById('adminImagenArchivo'));
+                const imgRuta = document.getElementById('adminImagen').value.trim();
+                const imagen = imgSubida || imgRuta || "../../PeluAssets/Iconos/Logo.png";
+
+                const todos = obtenerTodosProductos();
+                todos.push({
+                    id: Date.now(),
+                    categoria,
+                    nombre,
+                    precio,
+                    stock,
+                    eliminado: false,
+                    descripcion,
+                    imagen,
+                    detalle: "#"
+                });
+
+                guardarProductos(todos);
+                alert(`¡Producto "${nombre}" agregado con éxito (Stock: ${stock}/50)!`);
+                document.getElementById('formAgregarProducto').reset();
+                sincronizarSelectCategorias();
+                renderizarCatalogo();
+            }
+
             function renderizarCatalogo() {
                 const productos = obtenerProductos();
+                const categoriasObj = obtenerCategorias();
                 const contenedor = document.getElementById('contenedorCatalogo');
                 const esUsuarioAdmin = esAdmin();
 
                 const panelAdmin = document.getElementById('panelAdminAgregar');
                 if (esUsuarioAdmin) {
                     panelAdmin.classList.remove('d-none');
+                    sincronizarSelectCategorias();
+                    renderizarTablaAdmin();
                 } else {
                     panelAdmin.classList.add('d-none');
                 }
 
-                const categorias = ["Anime", "Pokemon", "Sonic", "Snoopys"];
+                // Combinar categorías registradas + cualquier categoría presente en productos
+                const nombresCategorias = [...new Set([
+                    ...categoriasObj.map(c => c.nombre),
+                    ...productos.map(p => p.categoria)
+                ])];
+
                 let html = "";
 
-                categorias.forEach(cat => {
-                    const prodsCat = productos.filter(p => p.categoria === cat);
+                nombresCategorias.forEach(catNombre => {
+                    const prodsCat = productos.filter(p => p.categoria === catNombre);
+                    const catInfo = categoriasObj.find(c => c.nombre === catNombre);
                     if (prodsCat.length > 0) {
-                        html += `<h2 class="text-pastel-cafe fw-bold mb-4 border-bottom pb-2">${cat}</h2>`;
+                        html += `
+                            <div class="d-flex align-items-center gap-2 mb-4 border-bottom pb-2">
+                                ${catInfo && catInfo.imagen ? `<img src="${catInfo.imagen}" alt="${catNombre}" style="width: 34px; height: 34px; object-fit: cover; border-radius: 50%;" onerror="this.style.display='none'">` : ''}
+                                <h2 class="text-pastel-cafe fw-bold m-0">${catNombre}</h2>
+                            </div>
+                        `;
                         html += `<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mb-5">`;
 
                         prodsCat.forEach(prod => {
@@ -191,24 +490,32 @@
                             const total = Number(prod.precio);
                             const neto = Math.round(total / 1.19);
                             const iva = total - neto;
+                            const stockActual = Math.min(50, Math.max(0, Number(prod.stock !== undefined ? prod.stock : 50)));
+                            const agotado = stockActual <= 0;
 
                             html += `
                                 <div class="col">
                                     <div class="card h-100 shadow-sm border-0 producto-card">
-                                        <img src="${imagenRuta}" class="card-img-top p-3" alt="${prod.nombre}" style="height: 220px; object-fit: contain;" onerror="this.src='../../PeluAssets/Iconos/Logo.png'">
+                                        <img src="${imagenRuta}" class="card-img-top p-3" alt="${prod.nombre}" style="height: 220px; object-fit: contain; ${agotado ? 'opacity: 0.55;' : ''}" onerror="this.src='../../PeluAssets/Iconos/Logo.png'">
                                         <div class="card-body d-flex flex-column text-center">
-                                            <h6 class="card-title text-pastel-cafe fw-bold">${prod.nombre}</h6>
+                                            <h6 class="card-title text-pastel-cafe fw-bold mb-1">${prod.nombre}</h6>
+                                            ${prod.descripcion && prod.descripcion !== prod.nombre ? `<small class="text-muted mb-2">${prod.descripcion}</small>` : ''}
                                             <p class="card-text text-success fw-bold fs-5 mt-auto mb-0">$${total.toLocaleString('es-CL')}</p>
-                                            <small class="text-muted d-block mb-2" style="font-size: 0.78rem;">
+                                            <small class="text-muted d-block mb-1" style="font-size: 0.78rem;">
                                                 IVA incluido (Neto: $${neto.toLocaleString('es-CL')} + IVA: $${iva.toLocaleString('es-CL')})
+                                            </small>
+                                            <small class="fw-bold ${agotado ? 'text-danger' : 'text-secondary'} d-block mb-2" style="font-size: 0.8rem;">
+                                                ${agotado ? 'Agotado (0 disponibles)' : `Stock disponible: ${stockActual} / 50`}
                                             </small>
                                             <div class="d-flex justify-content-between gap-2 mt-2">
                                                 <a href="${prod.detalle || '#'}" class="btn btn-sm btn-info-prod w-50">Ver info</a>
-                                                <button class="btn btn-sm btn-add-cart w-50" onclick="agregarAlCarro('${prod.nombre}', ${total}, '${imagenRuta}')">Al Carro</button>
+                                                <button class="btn btn-sm btn-add-cart w-50" ${agotado ? 'disabled style="opacity:0.5;cursor:not-allowed;"' : ''} onclick="agregarAlCarro('${prod.nombre.replace(/'/g, "\\'")}', ${total}, '${imagenRuta}')">
+                                                    ${agotado ? 'Agotado' : 'Al Carro'}
+                                                </button>
                                             </div>
                                             ${esUsuarioAdmin ? `
                                                 <button class="btn btn-danger btn-sm mt-2 w-100 fw-bold" onclick="eliminarProductoAdmin(${prod.id})">
-                                                    🗑️ Eliminar (Admin)
+                                                    🗑️ Quitar (Admin)
                                                 </button>
                                             ` : ''}
                                         </div>
@@ -223,41 +530,6 @@
                 contenedor.innerHTML = html;
             }
 
-            function guardarNuevoProducto(event) {
-                event.preventDefault();
-                const nombre = document.getElementById('adminNombre').value.trim();
-                const categoria = document.getElementById('adminCategoria').value;
-                const precio = Number(document.getElementById('adminPrecio').value);
-                let imagen = document.getElementById('adminImagen').value.trim();
-
-                if (!imagen) imagen = "../../PeluAssets/Iconos/Logo.png";
-
-                const productos = obtenerProductos();
-                const nuevoProd = {
-                    id: Date.now(),
-                    categoria,
-                    nombre,
-                    precio,
-                    imagen,
-                    detalle: "#"
-                };
-
-                productos.push(nuevoProd);
-                localStorage.setItem('productosDB', JSON.stringify(productos));
-                alert(`¡Producto "${nombre}" agregado con éxito!`);
-                document.getElementById('formAgregarProducto').reset();
-                renderizarCatalogo();
-            }
-
-            function eliminarProductoAdmin(id) {
-                if (confirm("¿Estás seguro de que deseas eliminar este producto del catálogo?")) {
-                    let productos = obtenerProductos();
-                    productos = productos.filter(p => p.id !== id);
-                    localStorage.setItem('productosDB', JSON.stringify(productos));
-                    renderizarCatalogo();
-                }
-            }
-
             function agregarAlCarro(nombre, precio, rutaImagen) {
                 const usuarioActivo = JSON.parse(localStorage.getItem('usuarioLogueado'));
                 
@@ -267,18 +539,37 @@
                     return;
                 }
 
+                const productos = obtenerProductos();
+                const prodCatalogo = productos.find(p => p.nombre === nombre);
+                const stockMax = prodCatalogo ? Math.min(50, Math.max(0, Number(prodCatalogo.stock))) : 50;
+
+                if (stockMax <= 0) {
+                    alert(`Lo sentimos, "${nombre}" está agotado.`);
+                    renderizarCatalogo();
+                    return;
+                }
+
                 const claveCarrito = `carritoPeluches_${usuarioActivo.correo}`;
                 const carrito = JSON.parse(localStorage.getItem(claveCarrito)) || [];
                 
                 const index = carrito.findIndex(prod => prod.nombre === nombre);
+                const cantidadActualEnCarro = index !== -1 ? (Number(carrito[index].cantidad) || 1) : 0;
+
+                if (cantidadActualEnCarro + 1 > stockMax) {
+                    alert(`No puedes agregar más unidades. Solo quedan ${stockMax} disponibles de "${nombre}".`);
+                    return;
+                }
+
                 if (index !== -1) {
-                    carrito[index].cantidad = (carrito[index].cantidad || 1) + 1;
+                    carrito[index].cantidad = cantidadActualEnCarro + 1;
                 } else {
                     carrito.push({ nombre: nombre, precio: precio, imagen: rutaImagen, cantidad: 1, seleccionado: true });
                 }
                 
                 localStorage.setItem(claveCarrito, JSON.stringify(carrito));
                 alert(`¡Se añadió "${nombre}" al Carro Exitosamente!`);
+                if (typeof actualizarCampanaNotificaciones === "function") actualizarCampanaNotificaciones();
+                if (typeof actualizarBurbujaCarrito === "function") actualizarBurbujaCarrito();
             }
 
             document.addEventListener('DOMContentLoaded', renderizarCatalogo);
