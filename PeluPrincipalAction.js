@@ -103,11 +103,10 @@ function cargarUsuariosPredefinidos() {
   ];
 
   // Insertar solo si no existen previamente en la lista
-  usuariosSemilla.forEach(usuarioBase => {
-    const yaExiste = usuarios.some(u => u.correo === usuarioBase.correo);
-    if (!yaExiste) {
-      usuarios.push(usuarioBase);
-    }
+  usuariosSemilla.forEach(base => {
+    const i = usuarios.findIndex(u => u.correo === base.correo);
+    if (i === -1) usuarios.push(base);
+    else usuarios[i] = { ...usuarios[i], rol: base.rol }; // corrige el rol
   });
 
   localStorage.setItem("usuariosDB", JSON.stringify(usuarios));
