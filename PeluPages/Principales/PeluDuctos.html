@@ -115,7 +115,7 @@
                         </select>
                     </div>
                     <div class="col-md-2">
-                        <label class="form-label fw-bold">Precio ($)</label>
+                        <label class="form-label fw-bold">Precio c/IVA ($)</label>
                         <input type="number" id="adminPrecio" class="form-control" placeholder="25000" required>
                     </div>
                     <div class="col-md-3">
@@ -140,7 +140,6 @@
         </footer>
 
         <script>
-            // Base de datos de productos iniciales
             const productosSemilla = [
                 { id: 1, categoria: "Anime", nombre: "Jujutsu kaisen - Yuji Itadori", precio: 26500, imagen: "../../PeluAssets/Peluches/Yuji Itadori.png", detalle: "detalle_itadori.html" },
                 { id: 2, categoria: "Anime", nombre: "Jujutsu kaisen - Gojo Satoru", precio: 28000, imagen: "../../PeluAssets/Peluches/Gojo Satoru.png", detalle: "detalle_gojo.html" },
@@ -171,7 +170,6 @@
                 const contenedor = document.getElementById('contenedorCatalogo');
                 const esUsuarioAdmin = esAdmin();
 
-                // Mostrar u ocultar panel de agregar según el rol
                 const panelAdmin = document.getElementById('panelAdminAgregar');
                 if (esUsuarioAdmin) {
                     panelAdmin.classList.remove('d-none');
@@ -190,16 +188,23 @@
 
                         prodsCat.forEach(prod => {
                             const imagenRuta = prod.imagen || '../../PeluAssets/Iconos/Logo.png';
+                            const total = Number(prod.precio);
+                            const neto = Math.round(total / 1.19);
+                            const iva = total - neto;
+
                             html += `
                                 <div class="col">
                                     <div class="card h-100 shadow-sm border-0 producto-card">
                                         <img src="${imagenRuta}" class="card-img-top p-3" alt="${prod.nombre}" style="height: 220px; object-fit: contain;" onerror="this.src='../../PeluAssets/Iconos/Logo.png'">
                                         <div class="card-body d-flex flex-column text-center">
                                             <h6 class="card-title text-pastel-cafe fw-bold">${prod.nombre}</h6>
-                                            <p class="card-text text-success fw-bold fs-5 mt-auto">$${Number(prod.precio).toLocaleString('es-CL')}</p>
+                                            <p class="card-text text-success fw-bold fs-5 mt-auto mb-0">$${total.toLocaleString('es-CL')}</p>
+                                            <small class="text-muted d-block mb-2" style="font-size: 0.78rem;">
+                                                IVA incluido (Neto: $${neto.toLocaleString('es-CL')} + IVA: $${iva.toLocaleString('es-CL')})
+                                            </small>
                                             <div class="d-flex justify-content-between gap-2 mt-2">
                                                 <a href="${prod.detalle || '#'}" class="btn btn-sm btn-info-prod w-50">Ver info</a>
-                                                <button class="btn btn-sm btn-add-cart w-50" onclick="agregarAlCarro('${prod.nombre}', ${prod.precio}, '${imagenRuta}')">Al Carro</button>
+                                                <button class="btn btn-sm btn-add-cart w-50" onclick="agregarAlCarro('${prod.nombre}', ${total}, '${imagenRuta}')">Al Carro</button>
                                             </div>
                                             ${esUsuarioAdmin ? `
                                                 <button class="btn btn-danger btn-sm mt-2 w-100 fw-bold" onclick="eliminarProductoAdmin(${prod.id})">
@@ -218,7 +223,6 @@
                 contenedor.innerHTML = html;
             }
 
-            // Función para agregar productos nuevos (Solo Admin)
             function guardarNuevoProducto(event) {
                 event.preventDefault();
                 const nombre = document.getElementById('adminNombre').value.trim();
@@ -245,7 +249,6 @@
                 renderizarCatalogo();
             }
 
-            // Función para eliminar productos (Solo Admin)
             function eliminarProductoAdmin(id) {
                 if (confirm("¿Estás seguro de que deseas eliminar este producto del catálogo?")) {
                     let productos = obtenerProductos();
@@ -255,7 +258,6 @@
                 }
             }
 
-            // Función original intacta para agregar al carro por usuario
             function agregarAlCarro(nombre, precio, rutaImagen) {
                 const usuarioActivo = JSON.parse(localStorage.getItem('usuarioLogueado'));
                 
