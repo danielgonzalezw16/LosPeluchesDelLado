@@ -8,7 +8,7 @@
 const PERMISOS = {
   admin: ["*"], // todo
   user: [
-    "ver_productos", "ver_detalle_producto",
+    "productos", "ver_detalle_producto",
     "comprar", "ver_carrito", "ver_mis_pedidos", "editar_perfil"
   ],
   vendedor: [
