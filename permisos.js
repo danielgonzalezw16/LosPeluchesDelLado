@@ -16,7 +16,7 @@ const PERMISOS = {
     "ver_ordenes", "ver_detalle_orden"
   ],
   invitado: [ // visitante sin sesión
-    "ver_productos", "ver_detalle_producto"
+    "productos", "ver_detalle_producto"
   ]
 };
 
