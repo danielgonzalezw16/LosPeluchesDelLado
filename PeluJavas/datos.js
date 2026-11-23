@@ -6,38 +6,38 @@
 const PRODUCTOS = [
   {
     id: 1,
-    nombre: "Pikachu Sonriente",
-    categoria: "Pokemon",
-    precio: 12990,
+    nombre: "Yuji Itadori",
+    categoria: "Anime",
+    precio: 26500,
     stock: 15,
-    descripcion: "Peluche suave de Pikachu, 30 cm, relleno hipoalergénico.",
+    descripcion: "Peluche suave de Yuji Itadori, 30 cm, relleno hipoalergénico.",
     imagen: "../../PeluAssets/Imagenes/Pokemon_plushes.png"
   },
   {
     id: 2,
-    nombre: "Snoopy Dormilón",
+    nombre: "Snoopy Rosa",
     categoria: "Snoopy",
-    precio: 14990,
+    precio: 25000,
     stock: 8,
-    descripcion: "Snoopy acostado sobre su casita, 35 cm.",
+    descripcion: "Snoopy Rosa, 35 cm.",
     imagen: "../../PeluAssets/Imagenes/Snoopy_plushes.png"
   },
   {
     id: 3,
-    nombre: "Sonic Clásico",
+    nombre: "Sonic Pequeño",
     categoria: "Sonic",
-    precio: 16990,
+    precio: 10000,
     stock: 0,
-    descripcion: "Sonic de pie con zapatillas rojas, 40 cm.",
+    descripcion: "Sonic Pequeño, 10 cm.",
     imagen: "../../PeluAssets/Imagenes/Sonic_Plushes.png"
   },
   {
     id: 4,
-    nombre: "Peluche Anime Kawaii",
-    categoria: "Anime",
-    precio: 11990,
+    nombre: "Eevee",
+    categoria: "Pokemon",
+    precio: 29000,
     stock: 22,
-    descripcion: "Personaje kawaii edición pastel, 25 cm.",
+    descripcion: "Eevee, 25 cm.",
     imagen: "../../PeluAssets/Imagenes/Anime_Plushes.jpg"
   }
 ];
