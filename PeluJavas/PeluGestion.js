@@ -7,6 +7,11 @@ const esc = s => String(s ?? "").replace(/[&<>"']/g, c => (
   { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]
 ));
 const clp = n => "$" + Number(n).toLocaleString("es-CL");
+const desglosarIva = total => {
+  const neto = Math.round(Number(total) / 1.19);
+  const iva = Number(total) - neto;
+  return { neto, iva, total: Number(total) };
+};
 
 // Muestra el error dentro de la tabla (y en la consola) para que nunca falle en silencio
 function mostrarError(msg) {
@@ -37,23 +42,30 @@ async function iniciarProductos() {
 
   function pintar(lista) {
     tbody.innerHTML = lista.length
-      ? lista.map(p => `
+      ? lista.map(p => {
+        const { neto, iva, total } = desglosarIva(p.precio);
+        return `
         <tr>
           <td>${p.id}</td>
           <td>${esc(p.nombre)}</td>
           <td>${esc(p.categoria)}</td>
-          <td>${clp(p.precio)}</td>
+          <td>
+            <strong>${clp(total)}</strong>
+            <small class="text-muted d-block">Neto: ${clp(neto)} | IVA (19%): ${clp(iva)}</small>
+          </td>
           <td>${p.stock > 0
               ? `<span class="badge bg-success">${p.stock}</span>`
               : `<span class="badge bg-danger">Agotado</span>`}</td>
           <td><button class="btn btn-sm btn-cafe-claro" data-id="${p.id}">Ver detalle</button></td>
-        </tr>`).join("")
+        </tr>`;
+      }).join("")
       : `<tr><td colspan="6" class="text-center">Sin resultados</td></tr>`;
   }
 
   function verDetalle(id) {
     const p = productos.find(x => x.id === id);
     if (!p) return;
+    const { neto, iva, total } = desglosarIva(p.precio);
     document.getElementById("modal-titulo").textContent = p.nombre;
     document.getElementById("modal-cuerpo").innerHTML = `
       <div class="row">
@@ -62,7 +74,9 @@ async function iniciarProductos() {
         </div>
         <div class="col-md-7">
           <p><b>Categoría:</b> ${esc(p.categoria)}</p>
-          <p><b>Precio:</b> ${clp(p.precio)}</p>
+          <p><b>Precio Neto:</b> ${clp(neto)}</p>
+          <p><b>IVA (19%):</b> ${clp(iva)}</p>
+          <p><b>Precio Total (IVA inc.):</b> ${clp(total)}</p>
           <p><b>Stock:</b> ${p.stock}</p>
           <p><b>Descripción:</b> ${esc(p.descripcion)}</p>
         </div>
@@ -95,11 +109,10 @@ async function iniciarOrdenes() {
     mostrarError("No se cargó datos.js (revisa la ruta del <script> en el HTML).");
     return;
   }
-  let ordenes = obtenerOrdenes();
+  const ordenes = ORDENES;
   const productos = PRODUCTOS;
 
-  // Las órdenes del carrito traen el nombre; las de ejemplo traen productoId
-  const nombreItem = i => i.nombre || (productos.find(p => p.id === i.productoId) || {}).nombre || "Producto #" + i.productoId;
+  const nombreProducto = id => (productos.find(p => p.id === id) || {}).nombre || "Producto #" + id;
   const totalOrden = o => o.items.reduce((s, i) => s + i.cantidad * i.precio, 0);
   const colorEstado = { "Pendiente": "warning", "En preparación": "info", "Entregada": "success" };
 
@@ -108,21 +121,28 @@ async function iniciarOrdenes() {
 
   function pintar(lista) {
     tbody.innerHTML = lista.length
-      ? lista.map(o => `
+      ? lista.map(o => {
+        const { neto, iva, total } = desglosarIva(totalOrden(o));
+        return `
         <tr>
           <td>#${o.id}</td>
           <td>${esc(o.fecha)}</td>
           <td>${esc(o.cliente)}</td>
           <td><span class="badge bg-${colorEstado[o.estado] || "secondary"}">${esc(o.estado)}</span></td>
-          <td>${clp(totalOrden(o))}</td>
+          <td>
+            <strong>${clp(total)}</strong>
+            <small class="text-muted d-block">Neto: ${clp(neto)} | IVA: ${clp(iva)}</small>
+          </td>
           <td><button class="btn btn-sm btn-cafe-claro" data-id="${o.id}">Ver detalle</button></td>
-        </tr>`).join("")
+        </tr>`;
+      }).join("")
       : `<tr><td colspan="6" class="text-center">Sin resultados</td></tr>`;
   }
 
   function verDetalle(id) {
     const o = ordenes.find(x => x.id === id);
     if (!o) return;
+    const { neto, iva, total } = desglosarIva(totalOrden(o));
     document.getElementById("modal-titulo").textContent = "Orden #" + o.id;
     document.getElementById("modal-cuerpo").innerHTML = `
       <p><b>Fecha:</b> ${esc(o.fecha)}</p>
@@ -133,13 +153,17 @@ async function iniciarOrdenes() {
         <tbody>
           ${o.items.map(i => `
             <tr>
-              <td>${esc(nombreItem(i))}</td>
+              <td>${esc(nombreProducto(i.productoId))}</td>
               <td>${i.cantidad}</td>
               <td>${clp(i.precio)}</td>
               <td>${clp(i.cantidad * i.precio)}</td>
             </tr>`).join("")}
         </tbody>
-        <tfoot><tr><th colspan="3" class="text-end">Total</th><th>${clp(totalOrden(o))}</th></tr></tfoot>
+        <tfoot>
+          <tr><td colspan="3" class="text-end">Neto</td><td>${clp(neto)}</td></tr>
+          <tr><td colspan="3" class="text-end">IVA (19%)</td><td>${clp(iva)}</td></tr>
+          <tr><th colspan="3" class="text-end">Total (IVA inc.)</th><th>${clp(total)}</th></tr>
+        </tfoot>
       </table>`;
     new bootstrap.Modal(document.getElementById("modal-detalle")).show();
   }
@@ -149,25 +173,15 @@ async function iniciarOrdenes() {
     if (btn) verDetalle(Number(btn.dataset.id));
   });
 
-  function aplicarFiltro() {
+  filtro.addEventListener("input", () => {
     const q = filtro.value.trim().toLowerCase();
     pintar(ordenes.filter(o =>
       String(o.id).includes(q) ||
       o.cliente.toLowerCase().includes(q) ||
       o.estado.toLowerCase().includes(q)));
-  }
-
-  filtro.addEventListener("input", aplicarFiltro);
-
-  // Se actualiza sola cuando un cliente compra desde otra pestaña
-  window.addEventListener("storage", e => {
-    if (e.key === CLAVE_ORDENES) {
-      ordenes = obtenerOrdenes();
-      aplicarFiltro();
-    }
   });
 
-  aplicarFiltro();
+  pintar(ordenes);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
