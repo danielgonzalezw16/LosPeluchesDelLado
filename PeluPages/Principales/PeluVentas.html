@@ -7,7 +7,8 @@
         <link rel="stylesheet" href="../../PeluPrincipalDesign.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-        <script src="../../PeluJavas/PeluBusquedaGeneral.js" defer></script>
+        <script src="../../permisos.js"></script>
+        <script src="../../PeluJavas/PeluBusquedaIndex.js" defer></script>
         <script src="../../PeluPrincipalAction.js" defer></script>
         <title>Pastel Carro</title>
         <link rel="icon" type="image/x-icon" href="../../PeluAssets/Iconos/Logo - copia.ico">
@@ -44,7 +45,7 @@
                     <img id="logo" class="logo" src="../../PeluAssets/Iconos/Logo.png" alt="logo" >
                 </div>
                  <div class="col-4 d-flex ms-auto" style="justify-content: end;">
-                    <button type="button" class="campana border-0 bg-transparent position-relative p-1 text-pastel-cafe align-items-row" style="pointer-events:auto;" onclick="window.open('PeluPages/Principales/PeluNotificaciones.html', '_blank')" aria-label="Campana">
+                    <button type="button" class="campana border-0 bg-transparent position-relative p-1 text-pastel-cafe align-items-row" style="pointer-events:auto;" onclick="window.open('PeluNotificaciones.html', '_blank')" aria-label="Campana">
                         <svg xmlns="http://w3.org" viewBox="2000 0 500 500" width="52" height="52">
                             <g transform="translate(2000, 0)">
                                 <circle class="fondo-circulo" cx="250" cy="250" r="210" />
@@ -74,17 +75,17 @@
                     </button>
 
                     <div class="init_button btn-group d-flex align-items-center">
-                        <a href="PeluPages/Principales/PeluIniciar.html" class="btn btn-cafe-claro fs-5" target="_blank">Iniciar Sesión</a>
-                        <a href="PeluPages/Principales/PeluCrearCuenta.html" class="btn btn-cafe-claro fs-5">Crear Cuenta</a>
+                        <a href="PeluIniciar.html" class="btn btn-cafe-claro fs-5" target="_blank">Iniciar Sesión</a>
+                        <a href="PeluCrearCuenta.html" class="btn btn-cafe-claro fs-5">Crear Cuenta</a>
                     </div>
                 </div>
             </div>
             
             <ul class="nav nav-justified rounded-5 shadow p-2 small" id="menuNav" style="background-color: #D7C4B7;"> 
-                <li class="nav-item"><a class="nav-link fs-6 fw-semibold text-uppercase text-pastel-cafe " target="_blank" href="../../index.html">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link fs-6 fw-semibold text-uppercase text-pastel-cafe " target="_blank" href="PeluDuctos.html">Productos</a></li>
-                <li class="nav-item"><a class="nav-link fs-6 fw-semibold text-uppercase text-pastel-cafe" target="_blank" href="PeluHistorial.html">Historial</a></li>
-                <li class="nav-item"><a class="nav-link fs-6 fw-semibold text-uppercase text-pastel-cafe" target="_blank" href="PeluSucursales.html">Sucursales</a></li>
+                <li class="nav-item"><a class="nav-link fs-6 fw-semibold text-uppercase text-pastel-cafe" href="../../index.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link fs-6 fw-semibold text-uppercase text-pastel-cafe" href="PeluDuctos.html">Productos</a></li>
+                <li class="nav-item"><a class="nav-link fs-6 fw-semibold text-uppercase text-pastel-cafe" href="PeluHistorial.html">Historial</a></li>
+                <li class="nav-item"><a class="nav-link fs-6 fw-semibold text-uppercase text-pastel-cafe" href="PeluSucursales.html">Sucursales</a></li>
             </ul>
         </div>
 
@@ -98,6 +99,7 @@
                     <div id="contenedorProductosCarrito" class="mb-4">
                         <p class="text-center text-muted">Cargando carrito...</p>
                     </div>
+
                     <h5 class="text-pastel-cafe mb-3 border-bottom pb-2">2. Entrega</h5>
                     <div class="mb-4">
                         <div class="mb-3">
@@ -137,6 +139,7 @@
                             </select>
                         </div>
                     </div>
+
                     <h5 class="text-pastel-cafe mb-3 border-bottom pb-2">3. Datos de Pago</h5>
                     <div class="row g-3 mb-4">
                         <div class="col-12">
@@ -173,4 +176,266 @@
                         <hr class="my-2">
                         <div class="d-flex justify-content-between align-items-center">
                             <span class="text-secondary fw-semibold">Total a pagar (IVA incluido):</span>
-                            <h2 class="text-pastel-cafe fw-bold m-0" id="monto
+                            <h2 class="text-pastel-cafe fw-bold m-0" id="montoTotal">$0</h2>
+                        </div>
+                    </div>
+                    
+                    <div id="mensajeError" class="text-danger fw-bold text-center mb-3 d-none"></div>
+                    <div id="mensajeExito" class="text-success fw-bold text-center mb-3 d-none"></div>
+
+                    <button class="btn w-100 fw-bold fs-5 shadow-sm text-white" style="background-color: #4e3629; border-radius: 12px;" type="submit" id="btnComprar">
+                        Procesar Venta
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <footer class="text-center pb-3">
+            <p class="text-pastel-cafe m-0">Grupo 8 de Jóvenes Vendedores</p>
+            <p class="text-muted small m-0">&copy; 2026 Lo Quieres, Te lo Vendo. Todos los Derechos Reservados</p>
+        </footer>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                let usuarioActivo = null;
+                try {
+                    usuarioActivo = JSON.parse(localStorage.getItem('usuarioLogueado'));
+                } catch (e) {
+                    usuarioActivo = null;
+                }
+                
+                if (!usuarioActivo || !usuarioActivo.correo) {
+                    alert('Debes iniciar sesión para ver tu carrito de compras.');
+                    window.location.href = 'PeluIniciar.html';
+                    return;
+                }
+
+                const claveCarrito = `carritoPeluches_${usuarioActivo.correo}`;
+                const claveHistorial = `ventasRealizadas_${usuarioActivo.correo}`;
+
+                const contenedorCarrito = document.getElementById('contenedorProductosCarrito');
+                const montoNetoText = document.getElementById('montoNeto');
+                const montoIvaText = document.getElementById('montoIva');
+                const montoTotalText = document.getElementById('montoTotal');
+                const btnComprar = document.getElementById('btnComprar');
+                const formVenta = document.getElementById('formVenta');
+                
+                const nroTarjetaInput = document.getElementById('nroTarjeta');
+                const titularInput = document.getElementById('titularTarjeta');
+                const tipoTarjetaInput = document.getElementById('tipoTarjeta');
+                const cvvInput = document.getElementById('claveCVV');
+                const mensajeError = document.getElementById('mensajeError');
+                const mensajeExito = document.getElementById('mensajeExito');
+
+                const formatoCLP = new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' });
+
+                let carrito = [];
+                try {
+                    carrito = JSON.parse(localStorage.getItem(claveCarrito)) || [];
+                } catch (e) {
+                    carrito = [];
+                }
+
+                carrito = carrito.map(item => ({
+                    ...item,
+                    cantidad: Number(item.cantidad) || 1,
+                    seleccionado: item.seleccionado !== false 
+                }));
+
+                function guardarCarrito() {
+                    localStorage.setItem(claveCarrito, JSON.stringify(carrito));
+                }
+
+                window.cambiarCantidad = function(index, delta) {
+                    const nuevaCantidad = carrito[index].cantidad + delta;
+                    if (nuevaCantidad >= 1) {
+                        carrito[index].cantidad = nuevaCantidad;
+                        guardarCarrito();
+                        renderizarCarrito();
+                    }
+                };
+
+                window.eliminarProducto = function(index) {
+                    carrito.splice(index, 1);
+                    guardarCarrito();
+                    renderizarCarrito();
+                };
+
+                window.toggleSeleccion = function(index, estaSeleccionado) {
+                    carrito[index].seleccionado = estaSeleccionado;
+                    guardarCarrito();
+                    renderizarCarrito();
+                };
+
+                function renderizarCarrito() {
+                    contenedorCarrito.innerHTML = '';
+                    if (carrito.length === 0) {
+                        contenedorCarrito.innerHTML = '<p class="text-center text-muted fw-semibold py-3">Tu carrito está vacío. ¡Ve a Productos para añadir peluches!</p>';
+                        montoNetoText.textContent = '$0';
+                        montoIvaText.textContent = '$0';
+                        montoTotalText.textContent = '$0';
+                        btnComprar.disabled = true;
+                        return;
+                    }
+
+                    btnComprar.disabled = false;
+                    let totalPagar = 0;
+
+                    carrito.forEach((prod, index) => {
+                        const precioUnitario = Number(prod.precio) || 0;
+                        const subtotal = precioUnitario * prod.cantidad;
+                        const netoUnitario = Math.round(precioUnitario / 1.19);
+                        const ivaUnitario = precioUnitario - netoUnitario;
+
+                        if (prod.seleccionado) {
+                            totalPagar += subtotal;
+                        }
+
+                        contenedorCarrito.innerHTML += `
+                            <div class="card mb-3 shadow-sm border-0 producto-card bg-light">
+                                <div class="row g-0 align-items-center p-2">
+                                    <div class="col-1 text-center">
+                                        <input class="form-check-input check-seleccionar" type="checkbox" 
+                                            ${prod.seleccionado ? 'checked' : ''} 
+                                            onchange="toggleSeleccion(${index}, this.checked)">
+                                    </div>
+                                    <div class="col-3 text-center">
+                                        <img src="${prod.imagen || '../../PeluAssets/Iconos/Logo.png'}" class="img-fluid rounded shadow-sm" alt="${prod.nombre}" style="height: 80px; width: 80px; object-fit: contain; background-color: white;" onerror="this.src='../../PeluAssets/Iconos/Logo.png'">
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="card-body p-2">
+                                            <h6 class="card-title text-pastel-cafe fw-bold mb-1 lh-sm" style="font-size: 0.95rem;">${prod.nombre}</h6>
+                                            <p class="card-text text-success fw-bold mb-0">$${subtotal.toLocaleString('es-CL')}</p>
+                                            <small class="text-muted d-block" style="font-size: 0.75rem;">Neto: $${(netoUnitario * prod.cantidad).toLocaleString('es-CL')} | IVA: $${(ivaUnitario * prod.cantidad).toLocaleString('es-CL')}</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 d-flex justify-content-end align-items-center gap-2 pe-3">
+                                        <div class="d-flex align-items-center rounded bg-white border shadow-sm">
+                                            <button type="button" class="btn btn-sm btn-cantidad fw-bold border-0 px-2" onclick="cambiarCantidad(${index}, -1)">-</button>
+                                            <span class="fw-bold text-pastel-cafe mx-2" style="min-width: 15px; text-align: center;">${prod.cantidad}</span>
+                                            <button type="button" class="btn btn-sm btn-cantidad fw-bold border-0 px-2" onclick="cambiarCantidad(${index}, 1)">+</button>
+                                        </div>
+                                        <button type="button" class="btn btn-danger btn-sm shadow-sm d-flex align-items-center justify-content-center" onclick="eliminarProducto(${index})" style="width: 32px; height: 32px;" title="Eliminar del carrito">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                              <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    const montoNeto = Math.round(totalPagar / 1.19);
+                    const montoIva = totalPagar - montoNeto;
+
+                    montoNetoText.textContent = formatoCLP.format(montoNeto);
+                    montoIvaText.textContent = formatoCLP.format(montoIva);
+                    montoTotalText.textContent = formatoCLP.format(totalPagar);
+                }
+
+                renderizarCarrito();
+
+                // Alternar bloques de Despacho / Retiro
+                const radioDespacho = document.getElementById('entregaDespacho');
+                const radioRetiro = document.getElementById('entregaRetiro');
+                const bloqueDespacho = document.getElementById('bloqueDespacho');
+                const bloqueRetiro = document.getElementById('bloqueRetiro');
+
+                if (radioDespacho && radioRetiro) {
+                    radioDespacho.addEventListener('change', () => {
+                        bloqueDespacho.classList.remove('d-none');
+                        bloqueRetiro.classList.add('d-none');
+                    });
+                    radioRetiro.addEventListener('change', () => {
+                        bloqueRetiro.classList.remove('d-none');
+                        bloqueDespacho.classList.add('d-none');
+                    });
+                }
+
+                nroTarjetaInput.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/\D/g, '');
+                    let formattedValue = '';
+                    for (let i = 0; i < value.length; i++) {
+                        if (i > 0 && i % 4 === 0) formattedValue += ' ';
+                        formattedValue += value[i];
+                    }
+                    e.target.value = formattedValue;
+                });
+
+                function mostrarError(mensaje, inputElement = null) {
+                    mensajeError.textContent = mensaje;
+                    mensajeError.classList.remove('d-none');
+                    mensajeExito.classList.add('d-none');
+                    if (inputElement) {
+                        inputElement.classList.add('is-invalid');
+                        inputElement.focus();
+                    }
+                }
+
+                function limpiarErrores() {
+                    mensajeError.classList.add('d-none');
+                    mensajeExito.classList.add('d-none');
+                    [titularInput, tipoTarjetaInput, nroTarjetaInput, cvvInput].forEach(el => el.classList.remove('is-invalid'));
+                }
+
+                formVenta.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    limpiarErrores();
+
+                    const productosComprados = carrito.filter(prod => prod.seleccionado);
+
+                    if (productosComprados.length === 0) {
+                        return mostrarError('Debes seleccionar al menos un peluche en el carrito para procesar el pago.');
+                    }
+
+                    const titular = titularInput.value.trim();
+                    if (titular.length < 3) return mostrarError('Ingresa un nombre de titular válido.', titularInput);
+
+                    const tipoTarjeta = tipoTarjetaInput.value;
+                    if (!tipoTarjeta) return mostrarError('Selecciona el tipo de tarjeta.', tipoTarjetaInput);
+
+                    const nroTarjeta = nroTarjetaInput.value.trim();
+                    const nroLimpio = nroTarjeta.replace(/\s/g, '');
+                    if (nroLimpio.length !== 16 || !/^\d{16}$/.test(nroLimpio)) {
+                        return mostrarError('El número de tarjeta debe tener exactamente 16 dígitos.', nroTarjetaInput);
+                    }
+
+                    const cvv = cvvInput.value.trim();
+                    if (!/^\d{3,4}$/.test(cvv)) return mostrarError('El CVV debe contener 3 o 4 números.', cvvInput);
+
+                    const totalPagar = productosComprados.reduce((sum, item) => sum + (Number(item.precio) * item.cantidad), 0);
+                    const montoNeto = Math.round(totalPagar / 1.19);
+                    const montoIva = totalPagar - montoNeto;
+                    const nombresProductos = productosComprados.map(item => `${item.cantidad}x ${item.nombre}`).join(', ');
+
+                    const nuevaVenta = {
+                        id: Date.now(),
+                        titular: titular,
+                        producto: nombresProductos,
+                        neto: montoNeto,
+                        iva: montoIva,
+                        precio: totalPagar,
+                        tipoTarjeta: tipoTarjeta,
+                        ultimosDigitos: nroLimpio.slice(-4),
+                        fecha: new Date().toLocaleString()
+                    };
+
+                    const ventasRegistradas = JSON.parse(localStorage.getItem(claveHistorial)) || [];
+                    ventasRegistradas.push(nuevaVenta);
+                    localStorage.setItem(claveHistorial, JSON.stringify(ventasRegistradas));
+
+                    carrito = carrito.filter(prod => !prod.seleccionado);
+                    guardarCarrito();
+                    renderizarCarrito();
+
+                    mensajeExito.textContent = '¡Venta realizada con éxito! Revisa el Historial.';
+                    mensajeExito.classList.remove('d-none');
+                    formVenta.reset();
+                    
+                    setTimeout(() => mensajeExito.classList.add('d-none'), 5000);
+                });
+            });
+        </script>
+    </body>
+</html>
