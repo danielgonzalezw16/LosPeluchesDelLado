@@ -99,7 +99,6 @@
                             style="pointer-events: none;"
                             stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                         > 
-                            <!-- Formación del Carrito -->
                             <polygon class="carro-svg" points="450,18 495,18 489,43 456,43" fill="transparent"></polygon>
                             <line class="carro-svg" x1="460" y1="10" x2="485" y2="10"></line>
                             <line class="carro-svg" x1="455" y1="18" x2="460" y2="10"></line> 
@@ -110,14 +109,11 @@
                                   fill="#ffe2c7" 
                                   style="transform-origin: 472px 25px; z-index: 20;">
                             </rect>
-                            <!-- Sonrisa -->
                             <path class="carro-svg" d="M 467 35 Q 472.5 42 478 35"></path>
-                            <!-- Ojos y Mejillas -->
                             <circle class="carro-svg" cx="485" cy="36" r="2" fill="rgb(255, 199, 199)"></circle>
                             <circle class="carro-svg" cx="460" cy="36" r="2" fill="rgb(255, 199, 199)"></circle>
                             <circle class="carro-svg" cx="480" cy="30" r="1" fill="rgb(213, 174, 125)" style="color: rgb(98, 47, 14);"></circle>
                             <circle class="carro-svg" cx="465" cy="30" r="1" fill="rgb(213, 174, 125)" style="color: rgb(98, 47, 14);"></circle>
-                            
                         </svg>
                     </button>
 
@@ -127,31 +123,20 @@
                     </div>
                 </div>
             </div>
-      
-
 
             <ul class="nav nav-justified rounded-5 shadow p-2 small" id="menuNav" style="background-color: #D7C4B7;"> 
-                
-                <!-- Opción 1: Inicio -->
                 <li class="nav-item">
                     <a class="nav-link fs-6 fw-semibold text-uppercase text-pastel-cafe " target="_blank" href="../../index.html">Inicio</a>
                 </li>
-
-                <!-- Opción 2: Productos -->
                 <li class="nav-item">
                     <a class="nav-link fs-6 fw-semibold text-uppercase text-pastel-cafe " target="_blank" href="PeluDuctos.html">Productos</a>
                 </li>
-                
-                <!-- Opción 3: Historial -->
                 <li class="nav-item">
                     <a class="nav-link active bg-white text-dark rounded-5 fs-6 fw-semibold text-uppercase text-pastel-cafe" href="PeluHistorial.html">Historial</a>
                 </li>
-
-                <!-- Opción 4: Usuario -->
                 <li class="nav-item">
                     <a class="nav-link fs-6 fw-semibold text-uppercase text-pastel-cafe" target="_blank" href="PeluSucursales.html">Sucursales</a>
                 </li>
-
             </ul>
             
         </div>
@@ -162,9 +147,7 @@
                 <div class="p-4 shadow-lg rounded-4 bg-white">
                     <h2 class="text-pastel-cafe text-center mb-4 fw-bold">Todas Mis Compras</h2>
                     
-                    <!-- JSON para Mostrar -->
                     <div id="contenedorHistorial" class="d-flex flex-column gap-3">
-                        <!-- Mensaje de carga inicial -->
                         <p class="text-center text-muted">Cargando Compras...</p>
                     </div>
 
@@ -182,7 +165,6 @@
             <p class="text-muted small m-0">&copy; 2026 Lo Quieres, Te lo Vendo. Todos los Derechos Reservados</p>
         </footer>
 
-        <!-- SCRIPT PARA RENDERIZAR EL HISTORIAL -->
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const usuarioActivo = JSON.parse(localStorage.getItem('usuarioLogueado'));
@@ -197,9 +179,9 @@
                     return;
                 }
 
-                // Clave única del historial por usuario
                 const claveHistorial = `ventasRealizadas_${usuarioActivo.correo}`;
                 const historial = JSON.parse(localStorage.getItem(claveHistorial)) || [];
+                const formatoCLP = new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' });
                 
                 contenedor.innerHTML = ''; 
                 
@@ -213,14 +195,19 @@
                 }
                 
                 historial.reverse().forEach(venta => {
-                    const precioFormateado = new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(venta.precio);
+                    const total = Number(venta.precio);
+                    const neto = venta.neto !== undefined ? venta.neto : Math.round(total / 1.19);
+                    const iva = venta.iva !== undefined ? venta.iva : (total - neto);
 
                     contenedor.innerHTML += `
                         <div class="card border-0 shadow-sm" style="background-color: #faf7f5; border-left: 5px solid #D7C4B7 !important;">
                             <div class="card-body">
                                 <h5 class="card-title text-pastel-cafe fw-bold">${venta.producto}</h5>
                                 <h6 class="card-subtitle mb-2 text-secondary small"><i class="bi bi-calendar"></i> ${venta.fecha}</h6>
-                                <p class="card-text mb-1 text-success fw-semibold">Total: ${precioFormateado}</p>
+                                <p class="card-text mb-1 text-success fw-semibold">Total Pagado: ${formatoCLP.format(total)}</p>
+                                <p class="card-text mb-1 text-secondary small">
+                                    Neto: ${formatoCLP.format(neto)} | IVA (19%): ${formatoCLP.format(iva)}
+                                </p>
                                 <p class="card-text mb-0 text-muted" style="font-size: 0.85rem;">
                                     Pagado con Tarjeta de ${venta.tipoTarjeta} terminada en ****${venta.ultimosDigitos}
                                 </p>
