@@ -95,10 +95,11 @@ async function iniciarOrdenes() {
     mostrarError("No se cargó datos.js (revisa la ruta del <script> en el HTML).");
     return;
   }
-  const ordenes = ORDENES;
+  let ordenes = obtenerOrdenes();
   const productos = PRODUCTOS;
 
-  const nombreProducto = id => (productos.find(p => p.id === id) || {}).nombre || "Producto #" + id;
+  // Las órdenes del carrito traen el nombre; las de ejemplo traen productoId
+  const nombreItem = i => i.nombre || (productos.find(p => p.id === i.productoId) || {}).nombre || "Producto #" + i.productoId;
   const totalOrden = o => o.items.reduce((s, i) => s + i.cantidad * i.precio, 0);
   const colorEstado = { "Pendiente": "warning", "En preparación": "info", "Entregada": "success" };
 
@@ -132,7 +133,7 @@ async function iniciarOrdenes() {
         <tbody>
           ${o.items.map(i => `
             <tr>
-              <td>${esc(nombreProducto(i.productoId))}</td>
+              <td>${esc(nombreItem(i))}</td>
               <td>${i.cantidad}</td>
               <td>${clp(i.precio)}</td>
               <td>${clp(i.cantidad * i.precio)}</td>
@@ -148,15 +149,25 @@ async function iniciarOrdenes() {
     if (btn) verDetalle(Number(btn.dataset.id));
   });
 
-  filtro.addEventListener("input", () => {
+  function aplicarFiltro() {
     const q = filtro.value.trim().toLowerCase();
     pintar(ordenes.filter(o =>
       String(o.id).includes(q) ||
       o.cliente.toLowerCase().includes(q) ||
       o.estado.toLowerCase().includes(q)));
+  }
+
+  filtro.addEventListener("input", aplicarFiltro);
+
+  // Se actualiza sola cuando un cliente compra desde otra pestaña
+  window.addEventListener("storage", e => {
+    if (e.key === CLAVE_ORDENES) {
+      ordenes = obtenerOrdenes();
+      aplicarFiltro();
+    }
   });
 
-  pintar(ordenes);
+  aplicarFiltro();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
